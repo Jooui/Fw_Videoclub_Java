@@ -1,51 +1,62 @@
 package modules.purchases.classes;
 
 import classes.Date;
+import modules.products.classes.Product;
+import modules.users.classes.User;
+import modules.products.classes.*;
 
 public class Purchase {
-	private int id_purchase;
-	private int id_member;
-	private String name_product;
+	private Product product;//id autoincrementable de compra
+	private User partner;
 	private int quantity;
 	private String price; // product_price * descuento_member(5%...10%..20%)
-	private String discount;
+	private int discount;
 	private Date purchaseDate;
 	private Date returnDate;
 
-	public Purchase(int id_purchase, int id_member, String name_product, int quantity, String price, Date purchaseDate,
+	public Purchase(Product product, User partner, int quantity, int discount, String price, Date purchaseDate,
 			Date returnDate) {
 		super();
-		this.id_purchase = id_purchase;
-		this.id_member = id_member;
-		this.name_product = name_product;
+		this.product = product;
+		this.partner = partner;
 		this.quantity = quantity;
 		this.price = price;
+		this.discount = calculateDiscount();
 		this.purchaseDate = purchaseDate;
 		this.returnDate = returnDate;
 	}
 
-	public int getId_purchase() {
-		return id_purchase;
+	public int calculateDiscount() {
+		
+		
+		return this.discount = 5;
+	}
+	
+	public int getDiscount() {
+		return discount;
+	}
+	
+	public int getIdProduct() {
+		Class<?> clazz = product.getClass(); 
+		String nameProducrt = ((Film)product).getName();
+	
+		return 5;
 	}
 
 	public void setId_purchase(int id_purchase) {
 		this.id_purchase = id_purchase;
 	}
 
-	public int getId_member() {
-		return id_member;
+	public int getIdPartner() {
+		return 11;
 	}
 
-	public void setId_member(int id_member) {
-		this.id_member = id_member;
+	public User getPartner() {
+		return partner;
 	}
-
-	public String getId_product() {
-		return name_product;
-	}
-
-	public void setId_product(String name_product) {
-		this.name_product = name_product;
+	
+	public Product getProduct() {
+		return product;
 	}
 
 	public int getQuantity() {

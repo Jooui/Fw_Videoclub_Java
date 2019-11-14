@@ -25,6 +25,11 @@ public class User_CRUD {
 			user = new Partner((String) properties.get(0), (String) properties.get(1), (String) properties.get(2), (String) properties.get(3), (String) properties.get(4), (String) properties.get(5), (Date) properties.get(6), (int) properties.get(7));
 		}
 		Singleton.users.add(user);
+		
+
+		User usuario = user;
+		
+		System.out.println(usuario.getClass());
 		System.out.println(user.toString());
 	}
 
