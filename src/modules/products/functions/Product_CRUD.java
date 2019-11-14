@@ -22,17 +22,17 @@ public class Product_CRUD {
 		if (type == "Film") { // create new Film
 			properties = Forms.filmForm();
 			if (properties == null)return;
-			product = new Film((String) properties.get(0), (int) properties.get(1), (double) properties.get(2), (Date) properties.get(3), (int) properties.get(4), (String) properties.get(5));
+			product = new Film((String) properties.get(0), (int) properties.get(1), (int) properties.get(2), (double) properties.get(3), (Date) properties.get(4), (int) properties.get(5), (String) properties.get(6));
 
 		} else if (type == "Game") { // create new Game
 			properties = Forms.gameForm();
 			if (properties == null)return;
-			product = new Game((String) properties.get(0), (int) properties.get(1), (double) properties.get(2), (Date) properties.get(3), (String) properties.get(4));
+			product = new Game((String) properties.get(0), (int) properties.get(1), (int) properties.get(2), (double) properties.get(3), (Date) properties.get(4), (String) properties.get(5));
 			
 		} else if (type == "Music") { // create new MusicDisc
 			properties = Forms.musicForm();
 			if (properties == null)return;
-			product = new MusicDisc((String) properties.get(0), (int) properties.get(1), (double) properties.get(2), (Date) properties.get(3), (int) properties.get(4), (String) properties.get(5));
+			product = new MusicDisc((String) properties.get(0), (int) properties.get(1), (int) properties.get(2), (double) properties.get(3), (Date) properties.get(4), (int) properties.get(5), (String) properties.get(6));
 		}
 		Singleton.products.add(product);
 	}

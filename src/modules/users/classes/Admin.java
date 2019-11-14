@@ -3,8 +3,8 @@ package modules.users.classes;
 import classes.Date;
 
 public class Admin extends User {
-    String username;
-    String password;
+	private String username;
+	private String password;
 
     public Admin(String username, String password, String name, String surnames, String city, String postalCode,
             String address, String email, Date fnac, int tlf) {

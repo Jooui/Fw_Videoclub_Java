@@ -10,6 +10,7 @@ import functions.translations;
 import dashboard.*;
 
 import modules.products.classes.*;
+import modules.users.classes.Partner;
 
 public class functions {
 	
@@ -41,6 +42,12 @@ public class functions {
 		
 		if (type == "Music") {
 			if (obj instanceof MusicDisc) {
+				correct = true;
+			}
+		}
+		
+		if (type == "Member") {
+			if (obj instanceof Partner) {
 				correct = true;
 			}
 		}

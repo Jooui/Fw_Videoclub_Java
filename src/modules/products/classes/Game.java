@@ -7,8 +7,8 @@ public class Game extends Product {
 	String platform;
 	
 	
-	public Game(String name, int price, double rating, Date date, String platform) {
-		super(name, price, rating, date);
+	public Game(String name, int price, int stock, double rating, Date date, String platform) {
+		super(name, price, stock, rating, date);
 		this.platform = platform;
 	}
 
@@ -26,7 +26,7 @@ public class Game extends Product {
 	@Override
 	public String toString() {
 		return "Game [getName()=" + getName() + ", getDate()=" + getDate() + ", getPrice()=" + getPrice()
-				+ ", getRating()=" + getRating() + ", platform=" + platform + "]";
+				+ ", getStock()="+ getStock() +", getRating()=" + getRating() + ", platform=" + platform + "]";
 	}
 	
 	

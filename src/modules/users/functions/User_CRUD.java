@@ -19,11 +19,10 @@ public class User_CRUD {
 			if (properties == null)return;
 			user = new Admin((String) properties.get(0), (String) properties.get(1), (String) properties.get(2), (String) properties.get(3), (String) properties.get(4), (String) properties.get(5), (String) properties.get(6), (String) properties.get(7), (Date) properties.get(8), (int) properties.get(9));
 
-		} else if (type == "Member") { // create new Game
-			properties = Forms.adminForm();
+		} else if (type == "Partner") { // create new Game
+			properties = Forms.partnerForm();
 			if (properties == null)return;
-			//user = new Game((String) properties.get(0), (int) properties.get(1), (double) properties.get(2), (Date) properties.get(3), (String) properties.get(4));
-			
+			user = new Partner((String) properties.get(0), (String) properties.get(1), (String) properties.get(2), (String) properties.get(3), (String) properties.get(4), (String) properties.get(5), (Date) properties.get(6), (int) properties.get(7));
 		}
 		Singleton.users.add(user);
 		System.out.println(user.toString());

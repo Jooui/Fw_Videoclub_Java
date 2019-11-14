@@ -4,11 +4,11 @@ import classes.*;
 
 public class Film extends Product {
 	
-	int duration;
-	String synopsis;
+	private int duration;
+	private String synopsis;
 	
-	public Film(String name, int price, double rating, Date date, int duration, String synopsis) {
-		super(name, price, rating, date);
+	public Film(String name, int price, int stock, double rating, Date date, int duration, String synopsis) {
+		super(name, price, stock, rating, date);
 		this.duration = duration;
 		this.synopsis = synopsis;
 		
@@ -33,7 +33,7 @@ public class Film extends Product {
 	@Override
 	public String toString() {
 		return "Film [getName()=" + getName() + ", getDate()=" + this.getDate().toString() + ", getPrice()=" + getPrice()
-				+ ", getRating()=" + getRating() + ", duration=" + duration + ", synopsis=" + synopsis + "]";
+				+ ", getStock()="+ getStock() + ", getRating()=" + getRating() + ", duration=" + duration + ", synopsis=" + synopsis + "]";
 	}
 	
 

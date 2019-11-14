@@ -26,8 +26,8 @@ public class home {
 	}
 
 	public static void goUsers() {
-		String[] options = {"Admins","Members","Back"}; //buttons name
-		String[] elements = {"goAdmins","goMembers"}; //functions name
+		String[] options = {"Admins","Partners","Back"}; //buttons name
+		String[] elements = {"goAdmins","goPartners"}; //functions name
 
 		functions.menu(options, elements, "Users\n", "Videoclub"); //call the main menu
 	}
@@ -37,6 +37,13 @@ public class home {
 		String[] elements = {"createUser", "showUser", "editUser", "deleteUser"}; //functions name
 
 		functions.secondaryMenu(options, elements, "Administrators Options\n", "ADMINISTRATORS", "Admin", "users", "User_CRUD"); //call the main menu
+	}
+	
+	public static void goPartners() {
+		String[] options = {"Add partner", "Search partner", "Edit partner", "Delete partner"}; //buttons name
+		String[] elements = {"createUser", "showUser", "editUser", "deleteUser"}; //functions name
+
+		functions.secondaryMenu(options, elements, "Partners Options\n", "PARTNERS", "Partner", "users", "User_CRUD"); //call the main menu
 	}
 
 	public static void goMovies() {

@@ -28,10 +28,11 @@ public class Forms {
 		Date dateObj = null;
 		int option = 0;
 		double getRatingDouble = 0.0;
-		String getName = "", getPrice = "", getRating = "", getDate = "", getDuration = "", getSynopsis = "", errorText = "";
-		int getPriceInt = 0, getDurationInt = 0;
+		String getName = "", getStock = "", getPrice = "", getRating = "", getDate = "", getDuration = "", getSynopsis = "", errorText = "";
+		int getPriceInt = 0, getDurationInt = 0, getStockInt = 0;
 		JTextField name = new JTextField();
 		JTextField price = new JTextField();
+		JTextField stock = new JTextField();
 		JTextField rating = new JTextField();
 		JTextField date = new JTextField();
 		JTextField duration = new JTextField();
@@ -41,6 +42,7 @@ public class Forms {
 		Object[] message = {
 		    "Create New Film\n\nName: ", name,
 		    "Price:", price,
+		    "Stock:", stock,
 		    "Rating:", rating,
 		    "Release date:", date,
 		    "Duration:", duration,
@@ -52,6 +54,7 @@ public class Forms {
 				error = false;
 				name.setText("Spiderman 2"); //clean the inputs.
 				price.setText("10");
+				stock.setText("23");
 				rating.setText("4.5");
 				date.setText("10/10/2010");
 				duration.setText("117");
@@ -64,7 +67,14 @@ public class Forms {
 					return null;
 				}
 					
-				getName = name.getText();//Obtener la informaci�n de los inputs
+				getName = name.getText();
+				if (getName.isEmpty()) {
+					name.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Name can't be empty\n");
+				} else {
+					name.setBorder(borderBlack);
+				}
 				
 				getPrice = price.getText();
 				if (functions.isNumeric(getPrice)==false) {
@@ -74,6 +84,16 @@ public class Forms {
 				} else {
 					getPriceInt = Integer.parseInt(getPrice);
 					price.setBorder(borderBlack);
+				}
+				
+				getStock = stock.getText();
+				if (functions.isNumeric(getStock)==false) {
+					error = true;
+					stock.setBorder(borderRed);
+					errorText = errorText + ("Put a correct stock. Ex: 23\n");
+				} else {
+					getStockInt = Integer.parseInt(getStock);
+					stock.setBorder(borderBlack);
 				}
 				
 				getRating = rating.getText();
@@ -106,9 +126,6 @@ public class Forms {
 				} else {
 					getDurationInt = Integer.parseInt(getDuration);
 					duration.setBorder(borderBlack);
-					//SwingUtilities.updateComponentTreeUI( duration );
-
-
 				}
 				
 				getSynopsis = synopsis.getText();
@@ -116,7 +133,7 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getName, getPriceInt, getRatingDouble, dateObj, getDurationInt, getSynopsis);
+			List<Object> list = Arrays.asList( getName, getPriceInt, getStockInt, getRatingDouble, dateObj, getDurationInt, getSynopsis);
 			result.addAll(list);
 			
 			
@@ -133,13 +150,14 @@ public class Forms {
 		Date dateObj = null;
 		int option = 0;
 		double getRatingDouble = 0.0;
-		String getName = "", getPrice = "", getRating = "", getDate = "", getPlatform = "", errorText = "";
-		int getPriceInt = 0;
+		String getName = "", getPrice = "", getStock = "", getRating = "", getDate = "", getPlatform = "", errorText = "";
+		int getPriceInt = 0, getStockInt = 0;
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
 		Border borderBlack = new JTextField().getBorder();
 
 		JTextField name = new JTextField();
 		JTextField price = new JTextField();
+		JTextField stock = new JTextField();
 		JTextField rating = new JTextField();
 		JTextField date = new JTextField();
 		JComboBox<String> platformCombo = new JComboBox<>(typePlatforms);
@@ -148,6 +166,7 @@ public class Forms {
 		Object[] message = {
 		    "Create New Game\n\nName: ", name,
 		    "Price:", price,
+		    "Stock:", stock,
 		    "Rating:", rating,
 		    "Release date:", date,
 		    "Platform:", platformCombo,
@@ -159,6 +178,7 @@ public class Forms {
 				error = false;
 				name.setText("Call of Duty"); //clean the inputs.
 				price.setText("50");
+				stock.setText("13");
 				rating.setText("5.0");
 				date.setText("10/10/2010");
 				
@@ -174,7 +194,15 @@ public class Forms {
 				Object obj = platformCombo.getSelectedItem(); 
 				String platform = String.valueOf(obj);
 				
-				getName = name.getText();//Obtener la informaci�n de los inputs
+				getName = name.getText();
+				if (getName.isEmpty()) {
+					name.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Name can't be empty\n");
+				} else {
+					name.setBorder(borderBlack);
+				}
+				
 				System.out.println("creategame");
 				getPrice = price.getText();
 				if (functions.isNumeric(getPrice)==false) {
@@ -184,6 +212,16 @@ public class Forms {
 				} else {
 					price.setBorder(borderBlack);
 					getPriceInt = Integer.parseInt(getPrice);
+				}
+				
+				getStock = stock.getText();
+				if (functions.isNumeric(getStock)==false) {
+					error = true;
+					stock.setBorder(borderRed);
+					errorText = errorText + ("Put a correct stock. Ex: 23\n");
+				} else {
+					getStockInt = Integer.parseInt(getStock);
+					stock.setBorder(borderBlack);
 				}
 				
 				getRating = rating.getText();
@@ -216,7 +254,7 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getName, getPriceInt, getRatingDouble, dateObj, getPlatform);
+			List<Object> list = Arrays.asList( getName, getPriceInt, getStockInt, getRatingDouble, dateObj, getPlatform);
 			result.addAll(list);
 			
 			
@@ -230,14 +268,15 @@ public class Forms {
 		ArrayList<Object> result = new ArrayList<Object>();
 		int option = 0;
 		double getRatingDouble = 0.0;
-		String getName = "", getPrice = "", getRating = "", getDate = "", getDuration = "", getArtist = "", errorText = "";
-		int getPriceInt = 0, getDurationInt = 0;
+		String getName = "", getPrice = "", getStock = "", getRating = "", getDate = "", getDuration = "", getArtist = "", errorText = "";
+		int getPriceInt = 0, getDurationInt = 0, getStockInt = 0;
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
 		Border borderBlack = new JTextField().getBorder();
 
 		Date dateObj = null;
 		JTextField name = new JTextField();
 		JTextField price = new JTextField();
+		JTextField stock = new JTextField();
 		JTextField rating = new JTextField();
 		JTextField date = new JTextField();
 		JTextField duration = new JTextField();
@@ -247,6 +286,7 @@ public class Forms {
 		    "Create New Music Disc\n\nName: ", name,
 		    "Artist:", artist,
 		    "Price:", price,
+		    "Stock:", stock,
 		    "Rating:", rating,
 		    "Release date:", date,
 		    "Duration:", duration,
@@ -257,6 +297,7 @@ public class Forms {
 				error = false;
 				name.setText("Estopa (Album)"); //clean the inputs.
 				price.setText("8");
+				stock.setText("44");
 				rating.setText("4.7");
 				date.setText("5/11/2013");
 				duration.setText("47");
@@ -270,6 +311,13 @@ public class Forms {
 				}
 					
 				getName = name.getText();//Obtener la informaci�n de los inputs
+				if (getName.isEmpty()) {
+					name.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Name can't be empty\n");
+				} else {
+					name.setBorder(borderBlack);
+				}
 				
 				getPrice = price.getText();
 				if (functions.isNumeric(getPrice)==false) {
@@ -316,123 +364,10 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getName, getPriceInt, getRatingDouble, dateObj, getDurationInt, getArtist);
+			List<Object> list = Arrays.asList( getName, getPriceInt, getStockInt, getRatingDouble, dateObj, getDurationInt, getArtist);
 			result.addAll(list);
-			
-			
+					
 			return result;
 			
-	}
-
-	public static ArrayList<Object> adminForm() {
-		ArrayList<Object> result = new ArrayList<Object>();
-
-		String[] choice = {"Create","Cancel"};
-		boolean error = false;
-		int option = 0;
-		Date dateObj = null;
-		String getUsername = "", getPassword = "", getName = "", getFnac = "", getSurnames = "", getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
-		int getTlfInt = 0;
-		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
-		Border borderBlack = new JTextField().getBorder();
-		JTextField username = new JTextField();
-		JTextField password = new JTextField();
-		JTextField name = new JTextField();
-		JTextField surnames = new JTextField();
-		JTextField city = new JTextField();
-		JTextField postalCode = new JTextField();
-		JTextField address = new JTextField();
-		JTextField tlf = new JTextField();
-		JTextField email = new JTextField();
-		JTextField fnac = new JTextField();
-		
-		Object[] message = {
-		    "Create New Admin\n\nUsername: ", username,
-		    "Password:", password,
-		    "Name:", name,
-		    "Surnames:", surnames,
-		    "City:", city,
-			"Postal Code:", postalCode,
-			"Address:", address,
-			"Phone Number:", tlf,
-			"Email:", email,
-			"Birth date:", fnac,
-		};
-			
-			do {
-				errorText = "";
-				error = false;
-				username.setText(""); //clean the inputs.
-				password.setText("");
-				name.setText("");
-				surnames.setText("Surrname1 Surrname2");
-				city.setText("Ontinyent");
-				postalCode.setText("46870");
-				address.setText("C/ Sant Josep, 6");
-				tlf.setText("665996125");
-				email.setText("jrevertvila@gmail.com");
-				fnac.setText("11/11/2011");
-				
-				//call OptionDialog with last parameters that we set.
-				option = JOptionPane.showOptionDialog(null, message,"Create Admin",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
-				if ((option == JOptionPane.CLOSED_OPTION) || (option == 1)) { //When you click on cancel or close the window, the function closes and returns to the previous one.
-					error = true;
-					return null;
-				}
-				getUsername = username.getText();//Obtener la informaci�n de los inputs
-				
-				getPassword = password.getText();
-
-				getName = name.getText();
-
-				getSurnames = surnames.getText();
-
-				getCity = city.getText();
-				
-				getPostalCode = postalCode.getText();
-
-				getAddress = address.getText();
-
-				getTlf = tlf.getText();
-				if (regexp.validateTlfEsp(getTlf)==false) {
-					tlf.setBorder(borderRed);
-					error = true;
-					errorText = errorText + ("Put a correct phone spanish number\n");
-				} else {
-					tlf.setBorder(borderBlack);
-					getTlfInt = Integer.parseInt(getTlf);
-				}
-
-				getEmail = email.getText();
-				if (regexp.validateEmail(getEmail)==false) {
-					email.setBorder(borderRed);
-					error = true;
-					errorText = errorText + ("Put a correct email\n");
-				}else {
-					email.setBorder(borderBlack);
-
-				}
-
-				getFnac = fnac.getText();
-				if (regexp.validateDate(getFnac)==false) {
-					fnac.setBorder(borderRed);
-					error = true;
-					errorText = errorText + ("Put a correct date. Ex: 27/10/2016\n");
-				}else {
-					fnac.setBorder(borderBlack);
-					dateObj = new Date(getFnac);
-					System.out.println(dateObj.toString());
-
-				}
-				
-				if (error == true) {
-					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}while(error == true);
-			List<Object> list = Arrays.asList( getUsername, getPassword, getName, getSurnames, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
-			result.addAll(list);
-			
-			
-			return result;
 	}
 }

@@ -6,19 +6,29 @@ public abstract class Product {
 	//attributes
 	private String name;
 	private int price;
+	private int stock;
 	private double rating;
 	private Date date;
 	
 	//Constructor
-	public Product(String name, int price, double rating, Date date) {
+	public Product(String name, int price, int stock, double rating, Date date) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.rating = rating;
 		this.date = date;
+		this.stock = stock;
 	}
 	
 	//getters and setters
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
 	public String getName() {
 		return name;

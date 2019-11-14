@@ -5,8 +5,8 @@ import classes.*;
 public class MusicDisc extends Product {
 	String artist;
 	int duration;
-	public MusicDisc(String name, int price, double rating, Date date, int duration, String artist) {
-		super(name, price, rating, date);
+	public MusicDisc(String name, int price, int stock, double rating, Date date, int duration, String artist) {
+		super(name, price, stock, rating, date);
 		this.artist = artist;
 		this.duration = duration;
 	}
@@ -25,7 +25,7 @@ public class MusicDisc extends Product {
 	@Override
 	public String toString() {
 		return "MusicDisc [getName()=" + getName() + ", getDate()=" + getDate() + ", getPrice()=" + getPrice()
-				+ ", getRating()=" + getRating() + ", artist=" + artist + ", duration=" + duration + "]";
+				+", getStock()="+ getStock() +", getRating()=" + getRating() + ", artist=" + artist + ", duration=" + duration + "]";
 	}
 
 }

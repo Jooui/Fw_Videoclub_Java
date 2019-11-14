@@ -4,15 +4,15 @@ import classes.Date;
 
 public abstract class User {
 	// Attributes
-	String name;
-	String surnames;
-	String city;
-	String postalCode;
-	String address;
-	String email;
-	Date fnac;
-	int tlf;
-	int age;
+	private String name;
+	private String surnames;
+	private String city;
+	private String postalCode;
+	private String address;
+	private String email;
+	private Date fnac;
+	private int tlf;
+	private int age;
 
 	public User(String name, String surnames, String city, String postalCode, String address, String email, Date fnac,
 			int tlf) {
@@ -25,7 +25,7 @@ public abstract class User {
 		this.email = email;
 		this.fnac = fnac;
 		this.tlf = tlf;
-		this.age = age;
+		this.age = calculateAge();
 	}
 
 	public int calculateAge() {
@@ -33,7 +33,7 @@ public abstract class User {
 		age = fnac.restarFechas();
 		return age;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
