@@ -25,7 +25,8 @@ public class Product_CRUD {
 			product = new Film((String) properties.get(0), (int) properties.get(1), (int) properties.get(2), (double) properties.get(3), (Date) properties.get(4), (int) properties.get(5), (String) properties.get(6));
 
 		} else if (type == "Game") { // create new Game
-			properties = Forms.gameForm();
+			properties = modules.purchases.templates.Forms.createPurchase();
+
 			if (properties == null)return;
 			product = new Game((String) properties.get(0), (int) properties.get(1), (int) properties.get(2), (double) properties.get(3), (Date) properties.get(4), (String) properties.get(5));
 			

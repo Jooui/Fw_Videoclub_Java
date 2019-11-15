@@ -1,10 +1,24 @@
 package dashboard;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 import functions.*;
+import modules.products.classes.Product;
 
 public class home {
 
 	public static void main(String[] args) {
+		
+		//modules.purchases.templates.Forms.createPurchase();
+		//System.exit(0);
+		
 		String[] options = {"Products","Users","Exit"}; //buttons name
 		String[] elements = {"goProducts","goUsers"}; //functions name
 
