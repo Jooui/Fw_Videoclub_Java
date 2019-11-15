@@ -155,7 +155,7 @@ public class Forms {
         
         final JLabel labelPricePVE = new JLabel();          
         labelPricePVE.setSize(500,100);
-        labelPricePVE.setText("Price PVE:                                                        49.00€");
+        labelPricePVE.setText("Price PVE:                                                        49.00ï¿½");
 
         final JLabel labelDiscount = new JLabel();          
         labelDiscount.setSize(500,100);
@@ -163,7 +163,7 @@ public class Forms {
 
         final JLabel labelTotalPrice = new JLabel();          
         labelTotalPrice.setSize(500,100);
-        labelTotalPrice.setText("Total Price:                                                     46.00€");
+        labelTotalPrice.setText("Total Price:                                                     46.00ï¿½");
         
         JPanel panelProducts = new JPanel();
 
