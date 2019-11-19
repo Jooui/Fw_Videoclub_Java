@@ -6,9 +6,9 @@ import functions.functions;
 public class Partner extends User{
 	private int id_partner;
 	private Date joinDate;
-	public Partner(String name, String surnames, String city, String postalCode, String address, String email, Date fnac,
+	public Partner(String name, String surnames, String dni, String city, String postalCode, String address, String email, Date fnac,
 			int tlf) {
-		super(name, surnames, city, postalCode, address, email, fnac, tlf);
+		super(name, surnames, dni, city, postalCode, address, email, fnac, tlf);
 		this.id_partner=assignIdUser();
 		this.joinDate=new Date();
 	}
@@ -33,6 +33,21 @@ public class Partner extends User{
 		return id;
 	}
 
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public String getDiscount() {
+		String discount = "";
+		if (getJoinDate().getYear()==2019)
+			discount = "05";
+		return discount;
+	}
+	
 	@Override
 	public String toString() {
 		return "Partner [getName()=" + getName() + ", getSurnames()=" + getSurnames() + ", getEmail()=" + getEmail()

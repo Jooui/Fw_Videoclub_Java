@@ -1,25 +1,23 @@
 package modules.purchases.classes;
 
-import java.lang.reflect.InvocationTargetException;
-
 import classes.Date;
 import modules.products.classes.Product;
 import modules.users.classes.Partner;
-import modules.purchases.classes.Singleton;
 import modules.users.classes.User;
+import modules.purchases.classes.Singleton;
 import modules.products.classes.*;
 
 public class Purchase {
-	private int id_purchase;
-	private Product product;// id autoincrementable de compra
-	private User partner;
+	private int id_purchase;// id autoincrementable de compra
+	private Product product;//Product Object
+	private Partner partner;//Partner Object
 	private int quantity;
-	private String price; // product_price * descuento_member(5%...10%..20%)
-	private int discount;
+	private double price; // product_price * descuento_member(5%...10%..20%)
+	private double discount;
 	private Date purchaseDate;
 	private Date returnMaxDate;
 
-	public Purchase(Product product, User partner, int quantity) {
+	public Purchase(Product product, Partner partner, int quantity) {
 		super();
 		this.id_purchase = calculatePurchaseId();
 		this.product = product;
@@ -29,25 +27,34 @@ public class Purchase {
 		this.discount = calculateDiscount();
 		this.purchaseDate = new Date();
 		this.returnMaxDate = calculateReturnMaxDate();
+		
+		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
+			
+			if (modules.products.classes.Singleton.products.get(i).getName() == product.getName()) {
+				int defaultStock = modules.products.classes.Singleton.products.get(i).getStock();
+				modules.products.classes.Singleton.products.get(i).setStock(defaultStock-quantity);
+				break;
+			}
+			
+		}
 	}
 
-	public int calculateDiscount() { //Dependiendo de la antiguedad del Partner, se aplicará un descuento mayor o menor. Antiguedad >= 6 meses = 5%
+	private double calculateDiscount() { //Dependiendo de la antiguedad del Partner, se aplicará un descuento mayor o menor. Antiguedad >= 6 meses = 5%
 																					//Antiguedad >= 12 meses = 10%		Antiguedad >= 24 meses = 20%
-		return this.discount = 05;
+		String discountStr = ("0."+partner.getDiscount());
+		return this.discount = Double.parseDouble(discountStr);
 	}
 	
-	public String calculatePrice() { //Multiplicar el precio del producto por el descuento. Ejemplo: 40 * 0.05
-		String finalPrice = "";
-		
-		String discountValue = "0."+calculateDiscount();
-		double discountInt = Double.parseDouble(discountValue);
-		double discountApplied = ((getProduct().getPrice())*discountInt);
-		finalPrice = (""+(getProduct().getPrice()-discountApplied));
-		
+	private double calculatePrice() { //Multiplicar el precio del producto por el descuento. Ejemplo: 40 * 0.05
+		String finalPriceStr = "";
+		double finalPrice = 0.0;
+		double discountApplied = ((getProduct().getPrice())*calculateDiscount());
+		finalPriceStr = (""+((getProduct().getPrice()-discountApplied)*quantity));
+		finalPrice = Double.parseDouble(finalPriceStr);
 		return finalPrice;
 	}
 	
-	public int calculatePurchaseId() { //Calcular el ID de compra que tendrá. Returns int.
+	private int calculatePurchaseId() { //Calcular el ID de compra que tendrá. Returns int.
 		int id = 0;
 		int lastId = 0;
 		
@@ -74,7 +81,7 @@ public class Purchase {
 		this.id_purchase = id_purchase;
 	}
 	
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
@@ -89,7 +96,7 @@ public class Purchase {
 		return 11;
 	}
 
-	public User getPartner() {
+	public Partner getPartner() {
 		return partner;
 	}
 
@@ -112,11 +119,11 @@ public class Purchase {
 		this.quantity = quantity;
 	}
 
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

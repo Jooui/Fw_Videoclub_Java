@@ -6,6 +6,7 @@ public abstract class User {
 	// Attributes
 	private String name;
 	private String surnames;
+	private String dni;
 	private String city;
 	private String postalCode;
 	private String address;
@@ -14,11 +15,12 @@ public abstract class User {
 	private int tlf;
 	private int age;
 
-	public User(String name, String surnames, String city, String postalCode, String address, String email, Date fnac,
+	public User(String name, String surnames, String dni, String city, String postalCode, String address, String email, Date fnac,
 			int tlf) {
 		super();
 		this.name = name;
 		this.surnames = surnames;
+		this.dni = dni;
 		this.city = city;
 		this.postalCode = postalCode;
 		this.address = address;
@@ -26,6 +28,14 @@ public abstract class User {
 		this.fnac = fnac;
 		this.tlf = tlf;
 		this.age = calculateAge();
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public int calculateAge() {
@@ -50,11 +60,11 @@ public abstract class User {
 		this.surnames = surnames;
 	}
 
-	public String getcity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setcity(String city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 

@@ -27,12 +27,13 @@ public class Forms {
 		boolean error = false;
 		int option = 0;
 		Date dateObj = null;
-		String getUsername = "", getPassword = "", getName = "", getFnac = "", getSurnames = "", getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
+		String getUsername = "", getPassword = "", getName = "", getFnac = "", getDni = "", getSurnames = "", getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
 		int getTlfInt = 0;
 		JTextField username = new JTextField();
 		JTextField password = new JTextField();
 		JTextField name = new JTextField();
 		JTextField surnames = new JTextField();
+		JTextField dni = new JTextField();
 		JTextField city = new JTextField();
 		JTextField postalCode = new JTextField();
 		JTextField address = new JTextField();
@@ -45,6 +46,7 @@ public class Forms {
 		    "Password:", password,
 		    "Name:", name,
 		    "Surnames:", surnames,
+		    "DNI: ", dni,
 		    "City:", city,
 			"Postal Code:", postalCode,
 			"Address:", address,
@@ -60,6 +62,7 @@ public class Forms {
 				password.setText("");
 				name.setText("");
 				surnames.setText("Surrname1 Surrname2");
+				dni.setText("49267906C");
 				city.setText("Ontinyent");
 				postalCode.setText("46870");
 				address.setText("C/ Sant Josep, 6");
@@ -145,7 +148,17 @@ public class Forms {
 					tlf.setBorder(borderBlack);
 					getTlfInt = Integer.parseInt(getTlf);
 				}
+				
+				getDni = dni.getText();
+				if (regexp.validateDNI(getDni)==false) {
+					dni.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Put a correct DNI\n");
+				} else {
+					dni.setBorder(borderBlack);
+				}
 
+				
 				getEmail = email.getText();
 				if (regexp.validateEmail(getEmail)==false) {
 					email.setBorder(borderRed);
@@ -184,12 +197,13 @@ public class Forms {
 		boolean error = false;
 		int option = 0;
 		Date dateObj = null;
-		String getName = "", getFnac = "", getSurnames = "", getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
+		String getName = "", getFnac = "", getSurnames = "", getDni = "" ,getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
 		int getTlfInt = 0;
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
 		Border borderBlack = new JTextField().getBorder();
 		JTextField name = new JTextField();
 		JTextField surnames = new JTextField();
+		JTextField dni = new JTextField();
 		JTextField city = new JTextField();
 		JTextField postalCode = new JTextField();
 		JTextField address = new JTextField();
@@ -200,6 +214,7 @@ public class Forms {
 		Object[] message = {
 		    "Create New Partner\n\nName:", name,
 		    "Surnames:", surnames,
+		    "DNI: ", dni,
 		    "City:", city,
 			"Postal Code:", postalCode,
 			"Address:", address,
@@ -213,6 +228,7 @@ public class Forms {
 				error = false;
 				name.setText("");
 				surnames.setText("Surrname1 Surrname2");
+				dni.setText("49267906C");
 				city.setText("Ontinyent");
 				postalCode.setText("46870");
 				address.setText("C/ Sant Josep, 6");
@@ -244,6 +260,7 @@ public class Forms {
 				} else {
 					surnames.setBorder(borderBlack);
 				}
+
 				getCity = city.getText();
 				if (getCity.isEmpty()) {
 					city.setBorder(borderRed);
@@ -277,6 +294,15 @@ public class Forms {
 					tlf.setBorder(borderBlack);
 					getTlfInt = Integer.parseInt(getTlf);
 				}
+				
+				getDni = dni.getText();
+				if (regexp.validateDNI(getDni)==false) {
+					dni.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Put a correct DNI\n");
+				} else {
+					dni.setBorder(borderBlack);
+				}
 
 				getEmail = email.getText();
 				if (regexp.validateEmail(getEmail)==false) {
@@ -304,7 +330,7 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getName, getSurnames, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
+			List<Object> list = Arrays.asList( getName, getSurnames, getDni, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
 			result.addAll(list);
 			
 			

@@ -1,37 +1,42 @@
 package dashboard;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-
+import classes.Date;
 import functions.*;
+import modules.products.classes.Film;
 import modules.products.classes.Product;
+import modules.users.classes.Partner;
+
 
 public class home {
 
 	public static void main(String[] args) {
-		
-		//modules.purchases.templates.Forms.createPurchase();
-		//System.exit(0);
-		
-		String[] options = {"Products","Users","Exit"}; //buttons name
+		String[] options = {"Dummies","Purchases","Rents","Admin Options","Exit"}; //buttons name
+		String[] elements = {"generateData","goPurchases","goRents","goAdminOpt"}; //functions name
+
+		functions.menu(options, elements, "Videoclub Manager\n", "Videoclub"); //call the main menu
+	}
+	
+	public static void goAdminOpt() {
+		String[] options = {"Products","Users","Back"}; //buttons name
 		String[] elements = {"goProducts","goUsers"}; //functions name
 
 		functions.menu(options, elements, "Videoclub Manager\n", "Videoclub"); //call the main menu
 	}
+	
+	public static void goPurchases() {
+		String[] options = {"Buy Product","Search purchase"}; //buttons name
+		String[] elements = {"createPurchase","searchPurchase"}; //functions name
 
-	public static void dashboard() {
-		String[] options = {"Products","Users","Exit"}; //buttons name
-		String[] elements = {"goProducts","goUsers"}; //functions name
-
-		functions.menu(options, elements, "Videoclub Manager\n", "Videoclub"); //call the main menu
+		functions.secondaryMenu(options, elements, "Purchase Options\n", "PURCHASES", "Purchase", "purchases", "Purchase_CRUD"); //call the main menu
 	}
+	
+	public static void goRents() {
+		String[] options = {"Movies","Games","Music Discs","Back"}; //buttons name
+		String[] elements = {"goMovies","goGames", "goMusic"}; //functions name
 
+		functions.menu(options, elements, "Products\n", "Videoclub"); //call the main menu
+	}
+	
 	public static void goProducts() {
 		String[] options = {"Movies","Games","Music Discs","Back"}; //buttons name
 		String[] elements = {"goMovies","goGames", "goMusic"}; //functions name
@@ -79,5 +84,19 @@ public class home {
 		String[] elements = {"createProduct", "showProducts", "editProduct", "deleteProduct"}; //functions name
 
 		functions.secondaryMenu(options, elements, "Music Options\n", "MUSIC", "Music", "products", "Product_CRUD"); //call the main menu
+	}
+	
+	public static void generateData() {
+		Date dateObj = new Date("25/10/2018");
+		Product product = new Film("Spiderman 2", 50, 3, 4.5, dateObj, 117, "Descripcion - Synopsis");
+		Product product2 = new Film("Pelicula 2", 25, 3, 4.5, dateObj, 117, "Descripcion - Synopsis");
+
+		Partner user = new Partner("Joel", "Revert Vila", "49267906C", "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
+		Partner user2 = new Partner("Pepe", "Username1 Username2", "67140703T", "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
+
+		modules.products.classes.Singleton.products.add(product);
+		modules.users.classes.Singleton.users.add(user);
+		modules.products.classes.Singleton.products.add(product2);
+		modules.users.classes.Singleton.users.add(user2);
 	}
 }
