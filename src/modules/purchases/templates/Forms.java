@@ -97,21 +97,21 @@ public class Forms {
 		final JLabel labelPriceUnit = new JLabel();
 		labelPriceUnit.setSize(500, 100);
 		labelPriceUnit
-				.setText("Unit Price:                                                        " + prodPricePVE + " €");
+				.setText("Unit Price:                                                  " + prodPricePVE + " EUR");
 
 		final JLabel labelPricePVE = new JLabel();
 		labelPricePVE.setSize(500, 100);
 		labelPricePVE
-				.setText("Price PVE:                                                        " + prodPricePVE + " €");
+				.setText("Price PVE:                                                  " + prodPricePVE + " EUR");
 
 		final JLabel labelDiscount = new JLabel();
 		labelDiscount.setSize(500, 100);
-		labelDiscount.setText("User Discount:                                                 " + discount + "%");
+		labelDiscount.setText("User Discount:                                           " + discount + "%");
 
 		final JLabel labelTotalPrice = new JLabel();
 		labelTotalPrice.setSize(500, 100);
 		labelTotalPrice
-				.setText("Total Price:                                                     " + finalPrice + " €");
+				.setText("Total Price:                                               " + finalPrice + " EUR");
 
 		final JLabel stockQuantity = new JLabel();
 		stockQuantity.setSize(500, 100);
@@ -321,14 +321,14 @@ public class Forms {
 					stock = prodSelected.getStock();
 					stockQuantity.setText("Stock: " + stock + " Unit/s");
 					prodPricePVE = prodSelected.getPrice();
-					labelPriceUnit.setText("Unit Price:                                                       "
-							+ (prodPricePVE) + " €");
-					labelPricePVE.setText("Price PVE:                                                        "
-							+ (prodPricePVE * quantity) + " €");
+					labelPriceUnit.setText("Unit Price:                                                 "
+							+ (prodPricePVE) + " EUR");
+					labelPricePVE.setText("Price PVE:                                                  "
+							+ (prodPricePVE * quantity) + " EUR");
 					if (discount != 0.00) {
 						finalPrice = (prodPricePVE - (prodPricePVE * discount)) * quantity;
-						labelTotalPrice.setText("Total Price:                                                     "
-								+ finalPrice + " €");
+						labelTotalPrice.setText("Total Price:                                               "
+								+ finalPrice + " EUR");
 
 					}
 
@@ -357,9 +357,9 @@ public class Forms {
 					discount = Double.parseDouble(discountRaw);
 					finalPrice = (prodPricePVE - (prodPricePVE * discount)) * quantity;
 					labelDiscount.setText(
-							"User Discount:                                                 " + discount + "%");
+							"User Discount:                                           " + discount + "%");
 					labelTotalPrice.setText(
-							"Total Price:                                                     " + finalPrice + " €");
+							"Total Price:                                               " + finalPrice + " EUR");
 
 					me.consume();
 				}
@@ -378,10 +378,10 @@ public class Forms {
 					quantityField.setText((quantity + ""));
 					if (discount != 0.00 && prodPricePVE != 0.00) {
 						finalPrice = (prodPricePVE - (prodPricePVE * discount)) * quantity;
-						labelTotalPrice.setText("Total Price:                                                     "
-								+ finalPrice + " €");
-						labelPricePVE.setText("Price PVE:                                                        "
-								+ (prodPricePVE * quantity) + " €");
+						labelTotalPrice.setText("Total Price:                                               "
+								+ finalPrice + " EUR");
+						labelPricePVE.setText("Price PVE:                                                  "
+								+ (prodPricePVE * quantity) + " EUR");
 					}
 				}
 			}
@@ -397,10 +397,10 @@ public class Forms {
 					quantityField.setText((quantity + ""));
 					if (discount != 0.00 && prodPricePVE != 0.00) {
 						finalPrice = (prodPricePVE - (prodPricePVE * discount)) * quantity;
-						labelTotalPrice.setText("Total Price:                                                     "
-								+ finalPrice + " €");
-						labelPricePVE.setText("Price PVE:                                                        "
-								+ (prodPricePVE * quantity) + " €");
+						labelTotalPrice.setText("Total Price:                                               "
+								+ finalPrice + " EUR");
+						labelPricePVE.setText("Price PVE:                                                  "
+								+ (prodPricePVE * quantity) + " EUR");
 					}
 				}
 

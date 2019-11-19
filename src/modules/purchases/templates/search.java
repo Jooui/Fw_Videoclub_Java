@@ -11,10 +11,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import modules.products.classes.Product;
 import modules.purchases.classes.Purchase;
+import modules.users.classes.Partner;
+import classes.Date;
 
 public class search {
 	public static ArrayList<Object> searchPurchase() {
@@ -40,7 +43,12 @@ public class search {
 		
 		
 		for (int i = 0; i < modules.purchases.classes.Singleton.purchases.size(); i++) {
-			listModelPurchases.addElement(modules.purchases.classes.Singleton.purchases.get(i).toString());
+			
+			Purchase objPurchase = modules.purchases.classes.Singleton.purchases.get(i);
+			
+			String strPurchase = ((i+1)+" - PRODUCT: "+objPurchase.getIdProduct()+" ---- PARTNER: "+objPurchase.getPartner().getName()+" DNI: "+objPurchase.getPartner().getDni()+" --- DATE: "+objPurchase.getPurchaseDate().toString());
+			
+			listModelPurchases.addElement(strPurchase);
 		}
 		
 		
@@ -51,12 +59,44 @@ public class search {
 
 				if (me.getClickCount() == 2) {
 					
-					String nameProd = "";
-					nameProd = "" + listPurchases.getSelectedValue();
+					Purchase objPurchase = modules.purchases.classes.Singleton.purchases.get(listPurchases.getSelectedIndex());
+					
+					/*Partner partnerPurchase = objPurchase.getPartner();
+					
+					Product productPurchase = objPurchase.getProduct();
+					
+					Date datePurchase = objPurchase.getPurchaseDate();
 					
 					
 					
-					JOptionPane.showMessageDialog(null, nameProd+"\n Objecto seleccionado. VENTANA ABIERTA");
+					Object[] dataProduct = {"Name: ",productPurchase.getName(),
+											"Type: ",productPurchase.getClass(),
+											"Price: ",productPurchase.getPrice(),
+											"Date: ",productPurchase.getDate().toString(),};
+					
+					String partnerNameSur = (partnerPurchase.getName()+" "+partnerPurchase.getSurnames());
+					String partnerAddress = (partnerPurchase.getPostalCode()+partnerPurchase.getCity()+partnerPurchase.getAddress());
+					
+					Object[] dataPartner = {"Name :",partnerNameSur,
+											"DNI: ",partnerPurchase.getDni(),
+											"Tlf: ",partnerPurchase.getTlf(),
+											"Email: ",partnerPurchase.getEmail(),
+											"Birth Date: ",partnerPurchase.getFnac().toString(),
+											"Address",partnerAddress};
+					
+					JSeparator separator = new JSeparator(JSeparator.VERTICAL);
+
+					
+					// CREATE JPANEL FOR ALIGN ITEMS HORITZONTALLY
+					JPanel panelInfo = new JPanel();
+
+					panelInfo.add(null, dataProduct);
+					panelInfo.add(separator);
+					panelInfo.add(null, dataPartner);
+					
+					Object[] message = {"Purchase INFO",panelInfo,};*/
+					
+					JOptionPane.showMessageDialog(null, objPurchase.toString()+"\n Objecto seleccionado. VENTANA ABIERTA");
 
 					me.consume();
 				}
