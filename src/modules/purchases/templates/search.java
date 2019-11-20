@@ -38,10 +38,10 @@ public class search {
 	@SuppressWarnings("serial")
 	public static ArrayList<Object> searchPurchase() {
 		ArrayList<Object> result = new ArrayList<Object>();
-		
+		JComboBox<String> boxFilter = new JComboBox<String>(new String[] { "Films", "Games", "Music Discs" });
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
-        columns.add("ID");
+        columns.add("ID ↓");
         columns.add("PRODUCT");
         columns.add("PARTNER");
         columns.add("DNI");
@@ -54,7 +54,7 @@ public class search {
 		listPurchases.setBounds(100, 100, 75, 75);
 
 		JComboBox<String> box1 = new JComboBox<String>(new String[] { "By Partner", "By Product", "By Date" });
-		JButton buttonFilterProd = new JButton("Filter");
+		JButton buttonFilterProd = new JButton("Search");
 		JTextField filterFieldProd = new JTextField(20);
 		buttonFilterProd.setBounds(200, 150, 80, 30);
 
@@ -223,6 +223,7 @@ public class search {
 			public void actionPerformed(ActionEvent e) {
 				tableModel.setRowCount(0);
 				
+				String searchType = "";
 				int contNum = 0;
 				int cont = 0;
 				String labelText = filterFieldProd.getText();
@@ -376,6 +377,19 @@ public class search {
 				
 			}
 		});
+
+		
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e)
+		    {
+		    	if (e.getClickCount() == 2) {
+			        int col = table.columnAtPoint(e.getPoint());
+			        String name = table.getColumnName(col);
+			        System.out.println("Column index selected " + col + " " + name);
+		    	}
+		    }
+		});
 		
 		buttonFilterProd.addActionListener(new ActionListener() {
 
@@ -429,7 +443,7 @@ public class search {
 		});
 		
 		
-		Object[] messageObj = { scrollProductsTable, "Choose filter", panelFilters,
+		Object[] messageObj = { boxFilter, scrollProductsTable, "Choose filter", panelFilters,
 
 		};
 		JOptionPane.showMessageDialog(null, messageObj);
