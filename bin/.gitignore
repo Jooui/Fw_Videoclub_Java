@@ -1,5 +1,4 @@
 /modules/
-/tests/
-/functions/
-/classes/
 /dashboard/
+/classes/
+/tests/

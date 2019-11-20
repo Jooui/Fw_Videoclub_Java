@@ -32,7 +32,7 @@ public class Date {
 
     public Date() {
     	
-    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 //    	if (calendardate != null) {
 //    	strdate = sdf.format(calendardate.getTime());
@@ -97,6 +97,18 @@ public class Date {
 
 	public void setSecond(int second) {
 		this.second = second;
+	}
+	public String getDayMonthYear() {
+		String withoutHour = getDay()+"-"+getMonth()+"-"+getYear();
+		return getDay()+"-"+getMonth()+"-"+getYear();
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
     
 }

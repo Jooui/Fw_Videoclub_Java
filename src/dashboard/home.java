@@ -4,6 +4,7 @@ import classes.Date;
 import functions.*;
 import modules.products.classes.Film;
 import modules.products.classes.Product;
+import modules.purchases.classes.Purchase;
 import modules.users.classes.Partner;
 
 
@@ -88,12 +89,22 @@ public class home {
 	
 	public static void generateData() {
 		Date dateObj = new Date("25/10/2018");
-		Product product = new Film("Spiderman 2", 50, 3, 4.5, dateObj, 117, "Descripcion - Synopsis");
-		Product product2 = new Film("Pelicula 2", 25, 3, 4.5, dateObj, 117, "Descripcion - Synopsis");
+		Product product = new Film("Spiderman 2", 50, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
+		Product product2 = new Film("Pelicula 2", 25, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
 
 		Partner user = new Partner("Joel", "Revert Vila", "49267906C", "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
 		Partner user2 = new Partner("Pepe", "Username1 Username2", "67140703T", "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
 
+		for (int i = 0; i < 15; i++) {
+			Purchase purchase = new Purchase(product2, user, 1);
+			Purchase purchase1 = new Purchase(product, user2, 1);
+			modules.purchases.classes.Singleton.purchases.add(purchase);
+			modules.purchases.classes.Singleton.purchases.add(purchase1);
+		}
+		
+		
+		
+		
 		modules.products.classes.Singleton.products.add(product);
 		modules.users.classes.Singleton.users.add(user);
 		modules.products.classes.Singleton.products.add(product2);
