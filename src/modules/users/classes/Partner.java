@@ -48,10 +48,15 @@ public class Partner extends User{
 		return discount;
 	}
 	
+
+
+
 	@Override
 	public String toString() {
-		return "Partner [getName()=" + getName() + ", getSurnames()=" + getSurnames() + ", getEmail()=" + getEmail()
-				+ ", getFnac()=" + getFnac() + ", getTlf()=" + getTlf() + ", id_partner=" + id_partner + ", joinDate=" + joinDate + "]";
+		return "Partner [getName()=" + getName() + ", getDni()=" + getDni() + ", getSurnames()=" + getSurnames()
+				+ ", getPostalCode()=" + getPostalCode() + ", getCity()=" + getCity() + ", getAddress()=" + getAddress()
+				+ ", getEmail()=" + getEmail() + ", getFnac()=" + getFnac() + ", getTlf()=" + getTlf() + ", id_partner="
+				+ id_partner + ", joinDate=" + joinDate + "]";
 	}
 
 	public int getId() {

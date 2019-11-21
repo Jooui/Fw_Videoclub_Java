@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -41,11 +42,15 @@ public class search {
 		JComboBox<String> boxFilter = new JComboBox<String>(new String[] { "Films", "Games", "Music Discs" });
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
-        columns.add("ID ↓");
-        columns.add("PRODUCT");
-        columns.add("PARTNER");
-        columns.add("DNI");
-        columns.add("DATE");
+        
+        //DOWN ARROW u25BC
+        //UP ARROW u25B2
+        
+        columns.add("ID \u25BC");
+        columns.add("PRODUCT \u25BC");
+        columns.add("PARTNER \u25BC");
+        columns.add("DNI \u25BC");
+        columns.add("DATE \u25BC");
         
 		DefaultListModel<Object> listModelPurchases = new DefaultListModel<>();
 
@@ -75,12 +80,12 @@ public class search {
 			String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
 					+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
 					+ objPurchase.getPurchaseDate().getDate());
-
+			String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
 			listModelPurchases.addElement(strPurchase);
-			values.add(new String[] {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),});
+			values.add(strP);
 			
 		}
-
+		//values.sort(Comparator.comparing(strP[2]));
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
         JTable table = new JTable(tableModel){public boolean isCellEditable(int rowIndex, int colIndex) {return false;}};

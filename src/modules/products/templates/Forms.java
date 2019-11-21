@@ -16,10 +16,13 @@ import javax.swing.border.Border;
 import classes.Date;
 import functions.functions;
 import functions.regexp;
+import modules.products.classes.Film;
+import modules.products.classes.Game;
+import modules.products.classes.MusicDisc;
 
 public class Forms {
-	public static ArrayList<Object> filmForm() {
-		String[] choice = {"Create","Cancel"};
+	public static ArrayList<Object> filmForm(Film film) {
+		
 		boolean error = false;
 		ArrayList<Object> result = new ArrayList<Object>();
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
@@ -39,29 +42,55 @@ public class Forms {
 		JTextArea synopsis = new JTextArea(6,25);
 		JScrollPane scrollSynpsis = new JScrollPane(synopsis);
 		
-		Object[] message = {
-		    "Create New Film\n\nName: ", name,
-		    "Price:", price,
-		    "Stock:", stock,
-		    "Rating:", rating,
-		    "Release date:", date,
-		    "Duration:", duration,
-		    "synopsis:", scrollSynpsis,
-		};
 			
 			do {
 				errorText = "";
 				error = false;
-				name.setText("Spiderman 2"); //clean the inputs.
-				price.setText("10");
-				stock.setText("23");
-				rating.setText("4.5");
-				date.setText("10/10/2010");
-				duration.setText("117");
-				synopsis.setText("descripcion-synopsis");
+				if (film == null) {
+					String[] choice = {"Create","Cancel"};
+					Object[] message = {
+						    "Create New Film\n\nName: ", name,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Duration:", duration,
+						    "synopsis:", scrollSynpsis,
+					};
+					
+					name.setText(""); //clean the inputs.
+					price.setText("");
+					stock.setText("");
+					rating.setText("");
+					date.setText("");
+					duration.setText("");
+					synopsis.setText("");	
+					option = JOptionPane.showOptionDialog(null, message,"Add Film",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}else {
+					String[] choice = {"Edit","Cancel"};
+					Object[] message = {
+						    "Edit Film\n\nName: ", name,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Duration:", duration,
+						    "synopsis:", scrollSynpsis,
+					};
+					
+					name.setText(film.getName()); //clean the inputs.
+					price.setText(""+film.getPrice());
+					stock.setText(""+film.getStock());
+					rating.setText(""+film.getRating());
+					date.setText(""+film.getDate().getDate());
+					duration.setText(""+film.getDuration());
+					synopsis.setText(film.getSynopsis());
+					option = JOptionPane.showOptionDialog(null, message,"Edit Film",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}
+				
 				
 				//call OptionDialog with last parameters that we set.
-				option = JOptionPane.showOptionDialog(null, message,"Add Film",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				
 				if ((option == JOptionPane.CLOSED_OPTION) || (option == 1)) { //When you click on cancel or close the window, the function closes and returns to the previous one.
 					error = true;
 					return null;
@@ -141,9 +170,8 @@ public class Forms {
 			
 	}
 	
-	public static ArrayList<Object> gameForm() {
+	public static ArrayList<Object> gameForm(Game game) {
 		
-		String[] choice = {"Create","Cancel"};
 		String[] typePlatforms = { "PS3", "PS4", "XBox 360", "XBox One", "Nintendo Switch", "Nintendo DS", "Nintendo WII", "PC" };
 		boolean error = false;
 		ArrayList<Object> result = new ArrayList<Object>();
@@ -163,28 +191,52 @@ public class Forms {
 		JComboBox<String> platformCombo = new JComboBox<>(typePlatforms);
 			
 		
-		Object[] message = {
-		    "Create New Game\n\nName: ", name,
-		    "Price:", price,
-		    "Stock:", stock,
-		    "Rating:", rating,
-		    "Release date:", date,
-		    "Platform:", platformCombo,
 
-		};
 			
 			do {
 				errorText = "";
 				error = false;
-				name.setText("Call of Duty"); //clean the inputs.
-				price.setText("50");
-				stock.setText("13");
-				rating.setText("5.0");
-				date.setText("10/10/2010");
+				
+				if (game == null) {
+					String[] choice = {"Create","Cancel"};
+					Object[] message = {
+						    "Create New Game\n\nName: ", name,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Platform:", platformCombo,
+					};
+					
+					name.setText(""); //clean the inputs.
+					price.setText("");
+					stock.setText("");
+					rating.setText("");
+					date.setText("");
+					option = JOptionPane.showOptionDialog(null, message,"Add Game",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}else {
+					String[] choice = {"Edit","Cancel"};
+					Object[] message = {
+						    "Edit Game\n\nName: ", name,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Platform:", platformCombo,
+					};
+					
+					name.setText(game.getName()); //clean the inputs.
+					price.setText(""+game.getPrice());
+					stock.setText(""+game.getStock());
+					rating.setText(""+game.getRating());
+					date.setText(""+game.getDate().getDate());
+					platformCombo.setSelectedItem(game.getPlatform());
+					option = JOptionPane.showOptionDialog(null, message,"Edit Game",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}
 				
 				
 				//call OptionDialog with last parameters that we set.
-				option = JOptionPane.showOptionDialog(null, message,"Add Game",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				//option = JOptionPane.showOptionDialog(null, message,"Add Game",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
 				
 				if ((option == JOptionPane.CLOSED_OPTION) || (option == 1)) { //When you click on cancel or close the window, the function closes and returns to the previous one.
 					error = true;
@@ -203,7 +255,6 @@ public class Forms {
 					name.setBorder(borderBlack);
 				}
 				
-				System.out.println("creategame");
 				getPrice = price.getText();
 				if (functions.isNumeric(getPrice)==false) {
 					price.setBorder(borderRed);
@@ -262,8 +313,7 @@ public class Forms {
 			
 	}
 	
-	public static ArrayList<Object> musicForm() {
-		String[] choice = {"Create","Cancel"};
+	public static ArrayList<Object> musicForm(MusicDisc music) {
 		boolean error = false;
 		ArrayList<Object> result = new ArrayList<Object>();
 		int option = 0;
@@ -281,30 +331,55 @@ public class Forms {
 		JTextField date = new JTextField();
 		JTextField duration = new JTextField();
 		JTextField artist = new JTextField();
-		
-		Object[] message = {
-		    "Create New Music Disc\n\nName: ", name,
-		    "Artist:", artist,
-		    "Price:", price,
-		    "Stock:", stock,
-		    "Rating:", rating,
-		    "Release date:", date,
-		    "Duration:", duration,
-		};
 			
 			do {
+				
 				errorText = "";
 				error = false;
-				name.setText("Estopa (Album)"); //clean the inputs.
-				price.setText("8");
-				stock.setText("44");
-				rating.setText("4.7");
-				date.setText("5/11/2013");
-				duration.setText("47");
-				artist.setText("Estopa");
+				
+				if (music == null) {
+					String[] choice = {"Create","Cancel"};
+					Object[] message = {
+						    "Create New Music Disc\n\nName: ", name,
+						    "Artist:", artist,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Duration:", duration,
+					};
+					
+					name.setText(""); //clean the inputs.
+					artist.setText("");
+					price.setText("");
+					stock.setText("");
+					rating.setText("");
+					date.setText("");
+					duration.setText("");
+					option = JOptionPane.showOptionDialog(null, message,"Add Music Disc",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}else {
+					String[] choice = {"Edit","Cancel"};
+					Object[] message = {
+							"Edit Music Disc\n\nName: ", name,
+						    "Artist:", artist,
+						    "Price:", price,
+						    "Stock:", stock,
+						    "Rating:", rating,
+						    "Release date:", date,
+						    "Duration:", duration,
+					};
+					
+					name.setText(music.getName()); //clean the inputs.
+					artist.setText(music.getArtist());
+					price.setText(""+music.getPrice());
+					stock.setText(""+music.getStock());
+					rating.setText(""+music.getRating());
+					date.setText(""+music.getDate().getDate());
+					duration.setText(""+music.getDuration());
+					option = JOptionPane.showOptionDialog(null, message,"Edit Music Disc",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+				}
 				
 				//call OptionDialog with last parameters that we set.
-				option = JOptionPane.showOptionDialog(null, message,"Add Music Disc",0,JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
 				if ((option == JOptionPane.CLOSED_OPTION) || (option == 1)) { //When you click on cancel or close the window, the function closes and returns to the previous one.
 					error = true;
 					return null;

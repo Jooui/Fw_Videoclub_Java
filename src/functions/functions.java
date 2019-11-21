@@ -10,6 +10,7 @@ import functions.translations;
 import dashboard.*;
 
 import modules.products.classes.*;
+import modules.users.classes.Admin;
 import modules.users.classes.Partner;
 
 public class functions {
@@ -25,6 +26,31 @@ public class functions {
 		
 		return translated;
 	}
+	
+	
+		private static final char[] LETRAS_NIF = { 'T', 'R', 'W', 'A', 'G', 'M',
+	            'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H',
+	            'L', 'C', 'K', 'E' };
+	    public static String generateDni(String seed) {
+	        if (seed != null) {
+	            try {
+	                Integer.parseInt(seed);
+	            } catch (NumberFormatException ex) {
+	                return "KO";
+	            }
+	        } else {
+	            seed = "";
+	        }
+	        String numeroDNI = String.valueOf(Math.random()).concat(seed);
+	        String fullDNI = numeroDNI.substring(numeroDNI.length() - 8);
+
+	        int dniInt = Integer.valueOf(fullDNI);
+	        fullDNI = fullDNI + LETRAS_NIF[dniInt % 23];
+	        return fullDNI;
+	}
+	
+	
+	
 	
 	public static boolean validateInstaceof(Object obj,String type) {
 		boolean correct = false;
@@ -46,8 +72,13 @@ public class functions {
 			}
 		}
 		
-		if (type == "Member") {
+		if (type == "Partner") {
 			if (obj instanceof Partner) {
+				correct = true;
+			}
+		}
+		if (type == "Admin") {
+			if (obj instanceof Admin) {
 				correct = true;
 			}
 		}

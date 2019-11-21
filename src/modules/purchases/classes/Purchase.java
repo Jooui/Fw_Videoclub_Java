@@ -38,7 +38,7 @@ public class Purchase {
 			
 		}
 	}
-
+	
 	private double calculateDiscount() { //Dependiendo de la antiguedad del Partner, se aplicará un descuento mayor o menor. Antiguedad >= 6 meses = 5%
 																					//Antiguedad >= 12 meses = 10%		Antiguedad >= 24 meses = 20%
 		String discountStr = ("0."+partner.getDiscount());

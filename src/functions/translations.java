@@ -12,6 +12,7 @@ public class translations {
 				"setPlatformBOX","Platform",
 				"setArtist","Artist",
 				"setDuration","Duration",
+				"setStock","Stock"
 		};
 		return translations;
 	}
