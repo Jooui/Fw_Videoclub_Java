@@ -143,6 +143,11 @@ public class Forms {
 				}else {
 					date.setBorder(borderBlack);
 					dateObj = new Date(getDate);
+					if (dateObj.validafecha()==false) {
+						error = true;
+						date.setBorder(borderRed);
+						errorText = errorText + ("Put a correct date. Ex: 27/10/2016\n");
+					}
 					System.out.println(dateObj.toString());
 
 				}

@@ -42,10 +42,10 @@ public class search {
 		JComboBox<String> boxFilter = new JComboBox<String>(new String[] { "Films", "Games", "Music Discs" });
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
+        List<String> purchList = new ArrayList<String>();
         
         //DOWN ARROW u25BC
         //UP ARROW u25B2
-        
         columns.add("ID \u25BC");
         columns.add("PRODUCT \u25BC");
         columns.add("PARTNER \u25BC");
@@ -83,8 +83,10 @@ public class search {
 			String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
 			listModelPurchases.addElement(strPurchase);
 			values.add(strP);
+			purchList.add(strPurchase);
 			
 		}
+		
 		//values.sort(Comparator.comparing(strP[2]));
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
@@ -452,6 +454,11 @@ public class search {
 
 		};
 		JOptionPane.showMessageDialog(null, messageObj);
+		int[] rows = table.getSelectedRows();
+		for (int i = 0; i < rows.length; i++) {
+			System.out.println(rows[i]);
+		}
+		
 		return result;
 	}
 }

@@ -47,6 +47,45 @@ public class Date {
         System.out.println("DATE: "+this.date);
     }
     
+    public boolean validafecha() {
+        boolean resultado = true;
+        GregorianCalendar fecha = new GregorianCalendar();
+        int dias_mes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        if ((this.month < 1) || (this.month > 12)) {
+            resultado = false;
+        }
+
+        if (resultado) {
+            fecha.set(this.year, this.month, this.day);
+
+            if (fecha.isLeapYear(this.year)) {
+                dias_mes[2] = 29;
+            }
+
+            if ((this.day < 1) || (this.day > dias_mes[this.month])) {
+                resultado = false;
+            }
+        }
+
+        return resultado;
+    }
+    
+    public int substractYears(Date date) {
+    	GregorianCalendar fecha1 = new GregorianCalendar(this.year, this.month-1, this.day+1);
+    	GregorianCalendar fecha2;
+    	
+    	
+    	
+    	
+    	return 0;
+    }
+    public GregorianCalendar CalendarToGregCalendar(Calendar fecha) {
+    	GregorianCalendar f = new GregorianCalendar();
+    	f.set(fecha.get(Calendar.YEAR),  fecha.get(Calendar.MONTH), fecha.get(Calendar.DATE));
+    	return f;
+    }
+    
     public int restarFechas() {
     	return 0;
     }
