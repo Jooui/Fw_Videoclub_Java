@@ -419,6 +419,16 @@ public class Forms {
 					getRatingDouble = Double.parseDouble(getRating);
 				}
 				
+				getStock = stock.getText();
+				if (functions.isNumeric(getStock)==false) {
+					error = true;
+					stock.setBorder(borderRed);
+					errorText = errorText + ("Put a correct stock. Ex: 23\n");
+				} else {
+					getStockInt = Integer.parseInt(getStock);
+					stock.setBorder(borderBlack);
+				}
+				
 				getDate = date.getText();
 				if (regexp.validateDate(getDate)==false) {
 					error = true;

@@ -27,5 +27,13 @@ public class MusicDisc extends Product {
 		return "MusicDisc [getName()=" + getName() + ", getDate()=" + getDate() + ", getPrice()=" + getPrice()
 				+", getStock()="+ getStock() +", getRating()=" + getRating() + ", artist=" + artist + ", duration=" + duration + "]";
 	}
-
+	
+	public String[][] getProperties(){
+		
+		String[] listGetters = { getName(), getArtist(), ""+getPrice(), ""+getStock(), ""+getRating(), getDate().getDate(), ""+getDuration()};
+		String[] listNames = {"Name: ", "Artist: ", "Price: ", "Stock: ", "Rating: ", "Release Date: : ", "Duration: "};
+		
+		String[][] result = {listGetters, listNames};
+		return result;
+	 }
 }

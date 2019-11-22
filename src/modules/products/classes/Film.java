@@ -1,5 +1,9 @@
 package modules.products.classes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import classes.*;
 
 public class Film extends Product {
@@ -35,6 +39,14 @@ public class Film extends Product {
 		return "Film [getName()=" + getName() + ", getDate()=" + this.getDate().toString() + ", getPrice()=" + getPrice()
 				+ ", getStock()="+ getStock() + ", getRating()=" + getRating() + ", duration=" + duration + ", synopsis=" + synopsis + "]";
 	}
-	
+
+	public String[][] getProperties(){
+		
+		String[] listGetters = { getName(), ""+getPrice(), ""+getStock(), ""+getRating(), getDate().getDate(), ""+getDuration(), getSynopsis()};
+		String[] listNames = {"Name: ", "Price: ", "Stock: ", "Rating: ", "Release Date: : ", "Duration: ", "Synopsis: "};
+		
+		String[][] result = {listGetters, listNames};
+		return result;
+	 }
 
 }

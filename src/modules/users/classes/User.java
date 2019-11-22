@@ -63,7 +63,7 @@ public abstract class User {
 
 	public int calculateAge() {
 		int age = 0;
-		age = fnac.restarFechas();
+		//age = fnac.restarFechas();
 		return age;
 	}
 	

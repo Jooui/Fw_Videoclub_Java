@@ -66,7 +66,7 @@ public class functions {
 			}
 		}
 		
-		if (type == "Music") {
+		if (type == "Music"||type == "MusicDisc") {
 			if (obj instanceof MusicDisc) {
 				correct = true;
 			}

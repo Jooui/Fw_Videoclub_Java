@@ -1,5 +1,9 @@
 package modules.products.classes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import classes.*;
 
 public class Game extends Product {
@@ -29,5 +33,12 @@ public class Game extends Product {
 				+ ", getStock()="+ getStock() +", getRating()=" + getRating() + ", platform=" + platform + "]";
 	}
 	
-	
+	public String[][] getProperties(){
+		
+		String[] listGetters = { getName(), ""+getPrice(), ""+getStock(), ""+getRating(), getDate().getDate(), getPlatform()};
+		String[] listNames = {"Name: ", "Price: ", "Stock: ", "Rating: ", "Release Date: : ", "Platform: "};
+		
+		String[][] result = {listGetters, listNames};
+		return result;
+	 }
 }
