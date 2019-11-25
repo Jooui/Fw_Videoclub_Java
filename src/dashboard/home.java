@@ -54,7 +54,7 @@ public class home {
 
 	public static void goAdmins() {
 		String[] options = {"Add admin", "Search admin", "Edit admin", "Delete admin"}; //buttons name
-		String[] elements = {"createUser", "showUser", "editUser", "deleteUser"}; //functions name
+		String[] elements = {"createUser", "searchUser", "editUser", "deleteUser"}; //functions name
 
 		functions.secondaryMenu(options, elements, "Administrators Options\n", "ADMINISTRATORS", "Admin", "users", "User_CRUD"); //call the main menu
 	}

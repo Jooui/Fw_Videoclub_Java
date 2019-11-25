@@ -66,5 +66,13 @@ public class Partner extends User{
 	public void setId(int id) {
 		this.id_partner = id;
 	}
+	public String[][] getProperties(){
+		
+		String[] listGetters = { ""+getName(), ""+getSurnames(), ""+getDni(), getFnac().getDate(), ""+getEmail(), getCity(), getPostalCode(), getAddress(), ""+getTlf(), getJoinDate().getDate()};
+		String[] listNames = { "Name: ", "Surnames: ", "DNI: ", "Birth Date: : ", "Email: ", "City: ", "Postal Code: ", "Address: ", "Tlf: ", "Join Date: "};
+		
+		String[][] result = {listGetters, listNames};
+		return result;
+}
 	
 }

@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 import classes.Date;
 import functions.functions;
 import functions.regexp;
+import modules.users.classes.Admin;
 
 public class Forms {
 
@@ -183,9 +184,8 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getUsername, getPassword, getName, getSurnames, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
+			List<Object> list = Arrays.asList( getUsername, getPassword, getName, getSurnames, getDni, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
 			result.addAll(list);
-			
 			
 			return result;
 	}

@@ -140,14 +140,6 @@ public class Product_CRUD {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public static void editProduct(String type) {
 		ArrayList<Integer> positions = new ArrayList<Integer>();
 		String result = "Choose the " + type + " you want to edit: \n\n";

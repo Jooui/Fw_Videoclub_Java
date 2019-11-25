@@ -28,5 +28,13 @@ public class Admin extends User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+	public String[][] getProperties(){
+			
+			String[] listGetters = { getUsername(), ""+getName(), ""+getSurnames(), ""+getDni(), getFnac().getDate(), ""+getEmail(), getCity(), getPostalCode(), getAddress(), ""+getTlf()};
+			String[] listNames = {"Username: ", "Name: ", "Surnames: ", "DNI: ", "Birth Date: : ", "Email: ", "City: ", "Postal Code: ", "Address: ", "Tlf: "};
+			
+			String[][] result = {listGetters, listNames};
+			return result;
+	}
 }

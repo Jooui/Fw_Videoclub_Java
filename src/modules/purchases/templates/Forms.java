@@ -151,8 +151,8 @@ public class Forms {
 			Product product = Singleton.products.get(a);
 			if (product instanceof Film) {
 				productsName.add(product.getName());
-				productsObj.add(product);
 			}
+			productsObj.add(product);
 		}
 
 		// OBTAIN THE NAME, DNI AND OBJECT OF EVERY PARTNER
@@ -316,8 +316,13 @@ public class Forms {
 
 						if (product.getName().equals(nameProd)) {
 							prodSelected = product;
+							System.out.println("ENCUENTRA EL OBJETO");
 						}
 					}
+					System.out.println(prodSelected.getStock());
+					System.out.println(nameProd);
+					
+					System.out.println("entra al action");
 					stock = prodSelected.getStock();
 					stockQuantity.setText("Stock: " + stock + " Unit/s");
 					prodPricePVE = prodSelected.getPrice();

@@ -34,12 +34,13 @@ import modules.products.classes.Product;
 import modules.purchases.classes.Purchase;
 import modules.users.classes.Partner;
 import classes.Date;
+import functions.functions;
 
 public class search {
 	@SuppressWarnings("serial")
 	public static ArrayList<Object> searchPurchase() {
 		ArrayList<Object> result = new ArrayList<Object>();
-		JComboBox<String> boxFilter = new JComboBox<String>(new String[] { "Films", "Games", "Music Discs" });
+		JComboBox<String> boxFilter = new JComboBox<String>(new String[] { "Films", "Games", "Music Discs", "All" });
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
         List<String> purchList = new ArrayList<String>();
@@ -72,19 +73,29 @@ public class search {
 		panelFilters.add(box1);
 		panelFilters.add(filterFieldProd);
 		panelFilters.add(buttonFilterProd);
-
+		
+		String[] classes = {"Film","Game","MusicDisc","All"};
 		for (int i = 0; i < modules.purchases.classes.Singleton.purchases.size(); i++) {
-
-			Purchase objPurchase = modules.purchases.classes.Singleton.purchases.get(i);
-
-			String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
-					+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
-					+ objPurchase.getPurchaseDate().getDate());
-			String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
-			listModelPurchases.addElement(strPurchase);
-			values.add(strP);
-			purchList.add(strPurchase);
 			
+			Purchase objPurchase = modules.purchases.classes.Singleton.purchases.get(i);
+			Product product = objPurchase.getProduct();
+			if (boxFilter.getSelectedIndex() == 3) {
+				String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
+						+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
+						+ objPurchase.getPurchaseDate().getDate());
+				String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
+				listModelPurchases.addElement(strPurchase);
+				values.add(strP);
+				purchList.add(strPurchase);
+			}else if (functions.validateInstaceof(product, classes[boxFilter.getSelectedIndex()])) {
+				String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
+						+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
+						+ objPurchase.getPurchaseDate().getDate());
+				String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
+				listModelPurchases.addElement(strPurchase);
+				values.add(strP);
+				purchList.add(strPurchase);
+			}
 		}
 		
 		//values.sort(Comparator.comparing(strP[2]));
@@ -102,14 +113,55 @@ public class search {
         
 		// LISTENERS
         
+        //JComboBox
+        
+        boxFilter.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				tableModel.setRowCount(0);
+				String[] classes = {"Film","Game","MusicDisc","All"};
+				System.out.println(classes[boxFilter.getSelectedIndex()]);
+				for (int i = 0; i < modules.purchases.classes.Singleton.purchases.size(); i++) {
+					
+					Purchase objPurchase = modules.purchases.classes.Singleton.purchases.get(i);
+					Product product = objPurchase.getProduct();
+					System.out.println(functions.validateInstaceof(product, classes[boxFilter.getSelectedIndex()]));
+					if (boxFilter.getSelectedIndex() == 3) {
+						String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
+								+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
+								+ objPurchase.getPurchaseDate().getDate());
+						String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
+						listModelPurchases.addElement(strPurchase);
+						values.add(strP);
+						purchList.add(strPurchase);
+						tableModel.addRow(new String[] {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),});
+						
+					} else if (functions.validateInstaceof(product, classes[boxFilter.getSelectedIndex()])) {
+						String strPurchase = ((i + 1) + " - PRODUCT: " + objPurchase.getIdProduct() + " ---- PARTNER: "
+								+ objPurchase.getPartner().getName() + " DNI: " + objPurchase.getPartner().getDni() + " --- DATE: "
+								+ objPurchase.getPurchaseDate().getDate());
+						String[] strP = {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),};
+						listModelPurchases.addElement(strPurchase);
+						values.add(strP);
+						purchList.add(strPurchase);
+						tableModel.addRow(new String[] {""+(i + 1),objPurchase.getIdProduct(),objPurchase.getPartner().getName(),objPurchase.getPartner().getDni(),objPurchase.getPurchaseDate().getDate(),});
+					}
+				}
+			}
+    	});
+        
+        //Table
         table.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
             	if (e.getClickCount() == 2) {
 
             		System.out.println(table.getSelectedRow());
+            		System.out.println(table.getValueAt(table.getSelectedRow(), 0)); //get id from column 1
+            		Purchase objPurchase = null;
+            		int pos = (Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0))-1);
             		
-            		Purchase objPurchase = modules.purchases.classes.Singleton.purchases
-							.get(table.getSelectedRow());
+            		objPurchase = modules.purchases.classes.Singleton.purchases
+							.get(pos);
 					Partner partnerPurchase = objPurchase.getPartner();
 					Product productPurchase = objPurchase.getProduct();
 					Date datePurchase = objPurchase.getPurchaseDate();
