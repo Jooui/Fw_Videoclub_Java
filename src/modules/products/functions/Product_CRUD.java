@@ -8,6 +8,7 @@ import modules.users.classes.Partner;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -141,72 +142,105 @@ public class Product_CRUD {
 	
 	
 	public static void editProduct(String type) {
-		ArrayList<Integer> positions = new ArrayList<Integer>();
-		String result = "Choose the " + type + " you want to edit: \n\n";
-		Integer cont = 0, selected;
-		Product product1 = null;
-		boolean correct = false;
 
-		ArrayList<Object> properties = new ArrayList<Object>();
-		for (int i = 0; i < Singleton.products.size(); i++) {
-			if (functions.validateInstaceof(Singleton.products.get(i), type) == true) {
-				cont++;
-				result = result + (cont + " - " + Singleton.products.get(i).getName() + "\n");
+		int cont_list = 0;
+		List<String[]> defaultValues = new ArrayList<String[]>();
+		List<String> columns = new ArrayList<String>();
+		List<String[]> values = new ArrayList<String[]>();
+		ArrayList<Integer> positions = new ArrayList<Integer>();
+		JCheckBox check=new JCheckBox();
+
+		// Create general columns for table
+		columns.add("ID");
+		columns.add("NAME \u25BC");
+		columns.add("PRICE \u25BC");
+		columns.add("STOCK \u25BC");
+		columns.add("DATE \u25BC");
+
+		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
+			Product objProduct = modules.products.classes.Singleton.products.get(i);
+			if (functions.validateInstaceof(objProduct, type)) {
+				cont_list++;
+				String[] strProd = { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), };
+				values.add(strProd);
+				defaultValues.add(strProd);
 				positions.add(i);
 			}
 		}
-		do {
-			if (cont == 0) {
-				JOptionPane.showMessageDialog(null, "There aren't any "+type);
-				return;
+		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
+		
+		JTable table = new JTable(tableModel) {
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false;
 			}
-			selected = functions.numberPositiveVerified(result, "Edit " + type);
-			if (selected == null)
-				return;
-			if (selected > cont) {
-				JOptionPane.showMessageDialog(null, "Select a valid option!");
-			} else {
-				correct = true;
-			}
-		} while (correct == false);
-		int getNumber = positions.get((selected - 1));
-		product1 = Singleton.products.get(getNumber);
+		};		
+		
+		JScrollPane scrollProductsTable = new JScrollPane(table);
+		
+		
 
-		if (product1 instanceof Film) {
-			properties = Forms.filmForm((Film) product1);
-			if (properties == null)
-				return;
-			Film product = null;
-			product = new Film((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
-					(double) properties.get(3), (Date) properties.get(4), (int) properties.get(5),
-					(String) properties.get(6));
-			Singleton.products.set(getNumber, product);
-			return;
+		
+		// LISTENERS
+        
+        table.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+            	if (e.getClickCount() == 2) {
+	            	System.out.println("entra al event");
+	            	Integer selected = 0, cont_list = 0;
+	        		ArrayList<Object> properties = new ArrayList<Object>();
+	        		Product product1 = modules.products.classes.Singleton.products.get(positions.get(table.getSelectedRow()));
+	        		selected = table.getSelectedRow();
+	        		int getNumber = positions.get((selected));
+	        		product1 = Singleton.products.get(getNumber);
+	        		
+	        		if (product1 instanceof Film) {
+	        			properties = Forms.filmForm((Film) product1);
+	        			if (properties == null)
+	        				return;
+	        			Film product = null;
+	        			product = new Film((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
+	        					(double) properties.get(3), (Date) properties.get(4), (int) properties.get(5),
+	        					(String) properties.get(6));
+	        			Singleton.products.set(getNumber, product);
+	
+	        		} else if (product1 instanceof Game) {
+	        			Game product = null;
+	        			properties = Forms.gameForm((Game) product1);
+	        			if (properties == null)
+	        				return;
+	
+	        			product = new Game((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
+	        					(double) properties.get(3), (Date) properties.get(4), (String) properties.get(5));
+	        			Singleton.products.set(getNumber, product);
+	
+	        		} else if (product1 instanceof MusicDisc) {
+	        			MusicDisc product = null;
+	        			properties = Forms.musicForm((MusicDisc) product1);
+	        			if (properties == null)
+	        				return;
+	
+	        			product = new MusicDisc((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
+	        					(double) properties.get(3), (Date) properties.get(4), (int) properties.get(5),
+	        					(String) properties.get(6));
+	        			Singleton.products.set(getNumber, product);
+	        			
+	        			
+	        		}
+					tableModel.setRowCount(0);
 
-		} else if (product1 instanceof Game) {
-			Game product = null;
-			properties = Forms.gameForm((Game) product1);
-			if (properties == null)
-				return;
-
-			product = new Game((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
-					(double) properties.get(3), (Date) properties.get(4), (String) properties.get(5));
-			Singleton.products.set(getNumber, product);
-			return;
-
-		} else if (product1 instanceof MusicDisc) {
-			MusicDisc product = null;
-			properties = Forms.musicForm((MusicDisc) product1);
-			if (properties == null)
-				return;
-
-			product = new MusicDisc((String) properties.get(0), (int) properties.get(1), (int) properties.get(2),
-					(double) properties.get(3), (Date) properties.get(4), (int) properties.get(5),
-					(String) properties.get(6));
-			Singleton.products.set(getNumber, product);
-			return;
-		}
-
+	        		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
+	        			Product objProduct = modules.products.classes.Singleton.products.get(i);
+	        			if (functions.validateInstaceof(objProduct, type)) {
+	        				cont_list++;
+							tableModel.addRow(new String[] { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), });
+	        			}
+	        		}
+	        		e.consume();
+            	}
+            }
+        });
+        
+        JOptionPane.showMessageDialog(null, scrollProductsTable); //Show products
 	}
 
 	public static void deleteProduct(String type) {
@@ -251,7 +285,7 @@ public class Product_CRUD {
 
 		//Put chechbox on JTable
 		TableColumn Tcol = new TableColumn();
-		Tcol=table.getColumnModel().getColumn(5);//el numero dentro de getColum se refiere a la posiciónen la que se encuentra tu columna	 
+		Tcol=table.getColumnModel().getColumn(5);//el numero dentro de getColum se refiere a la posiciï¿½nen la que se encuentra tu columna	 
 		Tcol.setCellEditor(table.getDefaultEditor(Boolean.class));
 		Tcol.setCellRenderer(table.getDefaultRenderer(Boolean.class));
 		
