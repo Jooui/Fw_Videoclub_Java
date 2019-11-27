@@ -36,7 +36,7 @@ public abstract class User {
 		String dniObtained = "";
 		for (int i = 0; i < Singleton.users.size(); i++) {
 			dniObtained = Singleton.users.get(i).getDni();
-			if (ddni == dniObtained) {
+			if (ddni.equals(dniObtained)) {
 				System.out.println("ENTRA AL IF");
 				System.out.println(this.dni);
 				System.out.println(Singleton.users.get(i).getDni());

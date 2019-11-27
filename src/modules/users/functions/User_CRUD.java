@@ -174,7 +174,7 @@ public class User_CRUD {
 
 		//Put chechbox on JTable
 		TableColumn Tcol = new TableColumn();
-		Tcol=table.getColumnModel().getColumn(5);//el numero dentro de getColum se refiere a la posiciónen la que se encuentra tu columna	 
+		Tcol=table.getColumnModel().getColumn(5);//el numero dentro de getColum se refiere a la posiciï¿½nen la que se encuentra tu columna	 
 		Tcol.setCellEditor(table.getDefaultEditor(Boolean.class));
 		Tcol.setCellRenderer(table.getDefaultRenderer(Boolean.class));
 		
@@ -224,13 +224,19 @@ public class User_CRUD {
     		int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?\n(The users will be permantelly deleted)");
     		
     		if ((confirm == JOptionPane.YES_OPTION)) {
+    			int u = 0;
     			for(int i=0;i<table.getModel().getRowCount();i++)
     	        {
+    				
     	          if ((boolean) table.getValueAt(i, 5)==true)
     	          {
-    	        	  int pos = positions.get(i);
+    	        	  
+    	        	  int pos = positions.get(u);
+    	        	  System.out.println(pos);
     	        	  modules.users.classes.Singleton.users.remove(pos);
+    	        	  u = u-1;
     	          }
+    	          u++;
     	       }
     			return;
     		}
