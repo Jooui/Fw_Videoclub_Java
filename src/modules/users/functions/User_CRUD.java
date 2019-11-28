@@ -46,7 +46,7 @@ public class User_CRUD {
 				properties = Forms.partnerForm();
 				if (properties == null)
 					return;
-				user = new Partner((String) properties.get(0), (String) properties.get(1), (String) properties.get(2),
+				user = new Partner("partner","123",(String) properties.get(0), (String) properties.get(1), (String) properties.get(2),
 						(String) properties.get(3), (String) properties.get(4), (String) properties.get(5),
 						(String) properties.get(6), (Date) properties.get(7), (int) properties.get(8));
 			}

@@ -92,8 +92,8 @@ public class home {
 		Product product = new Film("Spiderman 2", 50, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
 		Product product2 = new Film("Pelicula 2", 25, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
 
-		Partner user = new Partner("Joel", "Revert Vila", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
-		Partner user2 = new Partner("Pepe", "Username1 Username2", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
+		Partner user = new Partner("jowi","123","Joel", "Revert Vila", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
+		Partner user2 = new Partner("pepe","123","Pepe", "Username1 Username2", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
 
 		for (int i = 0; i < 15; i++) {
 			Purchase purchase = new Purchase(product2, user, 1);

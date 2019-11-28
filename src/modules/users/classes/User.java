@@ -14,10 +14,14 @@ public abstract class User {
 	private Date fnac;
 	private int tlf;
 	private int age;
+	private String username;
+	private String password;
 
-	public User(String name, String surnames, String dni, String city, String postalCode, String address, String email, Date fnac,
+	public User(String username, String password, String name, String surnames, String dni, String city, String postalCode, String address, String email, Date fnac,
 			int tlf) {
 		super();
+		this.setUsername(username);
+		this.setPassword(password);
 		this.name = name;
 		this.surnames = surnames;
 		this.dni = dni;
@@ -137,6 +141,22 @@ public abstract class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
