@@ -24,10 +24,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import classes.*;
 
@@ -66,7 +69,7 @@ public class Product_CRUD {
 	}
 
 	public static void showProducts(String type) {
-
+		System.out.println("ARRAY SIZE PRODUCTS: "+modules.products.classes.Singleton.products.size());
 		int cont_list = 0;
 		List<String[]> defaultValues = new ArrayList<String[]>();
 		List<String> columns = new ArrayList<String>();
@@ -76,29 +79,31 @@ public class Product_CRUD {
 
 		// Create general columns for table
 		columns.add("ID");
-		columns.add("NAME \u25BC");
-		columns.add("PRICE \u25BC");
-		columns.add("STOCK \u25BC");
-		columns.add("DATE \u25BC");
+		columns.add("NAME");
+		columns.add("PRICE");
+		columns.add("STOCK");
+		columns.add("DATE");
 
 		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
 			Product objProduct = modules.products.classes.Singleton.products.get(i);
 			if (functions.validateInstaceof(objProduct, type)) {
 				cont_list++;
-				String[] strProd = { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), };
+				String[] strProd = { "" + String.format("%04d", cont_list), objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), };
 				values.add(strProd);
 				defaultValues.add(strProd);
 				positions.add(i);
 			}
 		}
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
 		JTable table = new JTable(tableModel) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false;
 			}
 		};		
-		
+		table.setRowSorter(sorter);
+
 		JScrollPane scrollProductsTable = new JScrollPane(table);
 		
 		// LISTENERS
@@ -152,29 +157,31 @@ public class Product_CRUD {
 
 		// Create general columns for table
 		columns.add("ID");
-		columns.add("NAME \u25BC");
-		columns.add("PRICE \u25BC");
-		columns.add("STOCK \u25BC");
-		columns.add("DATE \u25BC");
+		columns.add("NAME");
+		columns.add("PRICE");
+		columns.add("STOCK");
+		columns.add("DATE");
 
 		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
 			Product objProduct = modules.products.classes.Singleton.products.get(i);
 			if (functions.validateInstaceof(objProduct, type)) {
 				cont_list++;
-				String[] strProd = { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), };
+				String[] strProd = { "" + String.format("%04d", cont_list), objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), };
 				values.add(strProd);
 				defaultValues.add(strProd);
 				positions.add(i);
 			}
 		}
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
 		JTable table = new JTable(tableModel) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false;
 			}
 		};		
-		
+		table.setRowSorter(sorter);
+
 		JScrollPane scrollProductsTable = new JScrollPane(table);
 		
 		
@@ -232,7 +239,7 @@ public class Product_CRUD {
 	        			Product objProduct = modules.products.classes.Singleton.products.get(i);
 	        			if (functions.validateInstaceof(objProduct, type)) {
 	        				cont_list++;
-							tableModel.addRow(new String[] { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), });
+							tableModel.addRow(new String[] { "" + String.format("%04d", cont_list), objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), });
 	        			}
 	        		}
 	        		e.consume();
@@ -254,17 +261,17 @@ public class Product_CRUD {
 
 		// Create general columns for table
 		columns.add("ID");
-		columns.add("NAME \u25BC");
-		columns.add("PRICE \u25BC");
-		columns.add("STOCK \u25BC");
-		columns.add("DATE \u25BC");
+		columns.add("NAME");
+		columns.add("PRICE");
+		columns.add("STOCK");
+		columns.add("DATE");
 		columns.add("DELETE");
 
 		for (int i = 0; i < modules.products.classes.Singleton.products.size(); i++) {
 			Product objProduct = modules.products.classes.Singleton.products.get(i);
 			if (functions.validateInstaceof(objProduct, type)) {
 				cont_list++;
-				Object[] strProd = { "" + cont_list, objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), Boolean.FALSE};				
+				Object[] strProd = { "" + String.format("%04d", cont_list), objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), Boolean.FALSE};				
 				values.add(strProd);
 				defaultValues.add(strProd);
 				positions.add(i);
@@ -272,7 +279,8 @@ public class Product_CRUD {
 		}
 
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
 		JTable table = new JTable(tableModel) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				if (colIndex == 5)
@@ -280,6 +288,7 @@ public class Product_CRUD {
 				return false;
 			}
 		};
+		table.setRowSorter(sorter);
 
 //		JTable table = new JTable(tableModel);
 

@@ -34,26 +34,29 @@ public abstract class User {
 		this.age = calculateAge();
 	}
 
-	public int find() {
+	public int findUsername() {
+		int result = -1;
+		String ussername = this.username;
+		String usernameObt = "";
+		for (int i = 0; i < Singleton.users.size(); i++) {
+			usernameObt = Singleton.users.get(i).getUsername();
+			if (ussername.equals(usernameObt)) {
+				result = 1;
+			}
+		}
+		return result;
+	}
+	
+	public int findDni() {
 		int result = -1;
 		String ddni = this.dni;
 		String dniObtained = "";
 		for (int i = 0; i < Singleton.users.size(); i++) {
 			dniObtained = Singleton.users.get(i).getDni();
 			if (ddni.equals(dniObtained)) {
-				System.out.println("ENTRA AL IF");
-				System.out.println(this.dni);
-				System.out.println(Singleton.users.get(i).getDni());
 				result = 1;
-			}else {
-				System.out.println("NO COINCIDE");
-				System.out.println(ddni+" != "+dniObtained);
 			}
-			System.out.println("GET DNI: "+Singleton.users.get(i).getDni());
 		}
-		System.out.println("ENTRA AL IF");
-		System.out.println(this.dni);
-		System.out.println(result);
 		return result;
 	}
 	

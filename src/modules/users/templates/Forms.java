@@ -19,7 +19,7 @@ import functions.regexp;
 import modules.users.classes.Admin;
 
 public class Forms {
-
+	
 	public static ArrayList<Object> adminForm() {
 		ArrayList<Object> result = new ArrayList<Object>();
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
@@ -193,14 +193,16 @@ public class Forms {
 	public static  ArrayList<Object> partnerForm() {
 		ArrayList<Object> result = new ArrayList<Object>();
 
-		String[] choice = {"Create","Cancel"};
+		String[] choice = {"Register","Cancel"};
 		boolean error = false;
 		int option = 0;
 		Date dateObj = null;
-		String getName = "", getFnac = "", getSurnames = "", getDni = "" ,getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
+		String getUsername = "", getPassword = "", getName = "", getFnac = "", getSurnames = "", getDni = "" ,getCity = "", getTlf = "" ,getPostalCode = "", errorText = "", getAddress = "", getEmail = "";
 		int getTlfInt = 0;
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
 		Border borderBlack = new JTextField().getBorder();
+		JTextField username = new JTextField();
+		JTextField password = new JTextField();
 		JTextField name = new JTextField();
 		JTextField surnames = new JTextField();
 		JTextField dni = new JTextField();
@@ -212,7 +214,9 @@ public class Forms {
 		JTextField fnac = new JTextField();
 		
 		Object[] message = {
-		    "Create New Partner\n\nName:", name,
+			"Register\n\nUsername: ", username,
+			"Password:", password,
+			"Name:", name,
 		    "Surnames:", surnames,
 		    "DNI: ", dni,
 		    "City:", city,
@@ -226,6 +230,8 @@ public class Forms {
 			do {
 				errorText = "";
 				error = false;
+				username.setText("");
+				password.setText("");
 				name.setText("");
 				surnames.setText("Surrname1 Surrname2");
 				dni.setText("49267906C");
@@ -243,6 +249,24 @@ public class Forms {
 					return null;
 				}
 
+				getUsername = username.getText();//Obtener la informaci�n de los inputs
+				if (getUsername.isEmpty()) {
+					username.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Username can't be empty\n");
+				} else {
+					username.setBorder(borderBlack);
+				}
+				
+				getPassword = password.getText();
+				if (getPassword.isEmpty()) {
+					password.setBorder(borderRed);
+					error = true;
+					errorText = errorText + ("Password can't be empty\n");
+				} else {
+					password.setBorder(borderBlack);
+				}
+				
 				getName = name.getText();
 				if (getName.isEmpty()) {
 					name.setBorder(borderRed);
@@ -330,7 +354,7 @@ public class Forms {
 					JOptionPane.showMessageDialog(null, errorText,"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}while(error == true);
-			List<Object> list = Arrays.asList( getName, getSurnames, getDni, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
+			List<Object> list = Arrays.asList( getUsername, getPassword, getName, getSurnames, getDni, getCity, getPostalCode, getAddress, getEmail, dateObj, getTlfInt);
 			result.addAll(list);
 			
 			

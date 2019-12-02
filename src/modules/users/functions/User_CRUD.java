@@ -9,8 +9,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import classes.*;
 import functions.functions;
@@ -46,11 +49,11 @@ public class User_CRUD {
 				properties = Forms.partnerForm();
 				if (properties == null)
 					return;
-				user = new Partner("partner","123",(String) properties.get(0), (String) properties.get(1), (String) properties.get(2),
-						(String) properties.get(3), (String) properties.get(4), (String) properties.get(5),
-						(String) properties.get(6), (Date) properties.get(7), (int) properties.get(8));
+				user = new Partner((String) properties.get(0),(String) properties.get(1),(String) properties.get(2), (String) properties.get(3), (String) properties.get(4),
+						(String) properties.get(5), (String) properties.get(6), (String) properties.get(7),
+						(String) properties.get(8), (Date) properties.get(9), (int) properties.get(10));
 			}
-			if (user.find() == 1) {
+			if (user.findUsername() == 1) { //Actually only finding by USERNAME
 				repeated = true;
 				JOptionPane.showMessageDialog(null, "This user already exists", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -69,29 +72,31 @@ public class User_CRUD {
 
 		// Create general columns for table
 		columns.add("ID");
-		columns.add("NAME \u25BC");
-		columns.add("SURNAMES \u25BC");
-		columns.add("DNI \u25BC");
-		columns.add("EMAIL \u25BC");
+		columns.add("NAME");
+		columns.add("SURNAMES");
+		columns.add("DNI");
+		columns.add("EMAIL");
 
 		for (int i = 0; i < modules.users.classes.Singleton.users.size(); i++) {
 			User objUser = modules.users.classes.Singleton.users.get(i);
 			if (functions.validateInstaceof(objUser, type)) {
 				cont_list++;
-				String[] strProd = { "" + cont_list, objUser.getName(),objUser.getSurnames(),"" + objUser.getDni(), objUser.getEmail(), };
+				String[] strProd = { "" + String.format("%04d", cont_list), objUser.getName(),objUser.getSurnames(),"" + objUser.getDni(), objUser.getEmail(), };
 				values.add(strProd);
 				defaultValues.add(strProd);
 				positions.add(i);
 			}
 		}
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
 		JTable table = new JTable(tableModel) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false;
 			}
 		};		
-		
+		table.setRowSorter(sorter);
+
 		JScrollPane scrollUsersTable = new JScrollPane(table);
 		
 		// LISTENERS
@@ -143,17 +148,17 @@ public class User_CRUD {
 
 		// Create general columns for table
 		columns.add("ID");
-		columns.add("NAME \u25BC");
-		columns.add("SURNAMES \u25BC");
-		columns.add("DNI \u25BC");
-		columns.add("EMAIL \u25BC");
+		columns.add("NAME");
+		columns.add("SURNAMES");
+		columns.add("DNI");
+		columns.add("EMAIL");
 		columns.add("DELETE");
 
 		for (int i = 0; i < modules.users.classes.Singleton.users.size(); i++) {
 			User objUser = modules.users.classes.Singleton.users.get(i);
 			if (functions.validateInstaceof(objUser, type)) {
 				cont_list++;
-				Object[] strObj = { "" + cont_list, objUser.getName(),objUser.getSurnames(),"" + objUser.getDni(), objUser.getEmail(), Boolean.FALSE};				
+				Object[] strObj = { "" + String.format("%04d", cont_list), objUser.getName(),objUser.getSurnames(),"" + objUser.getDni(), objUser.getEmail(), Boolean.FALSE};				
 				values.add(strObj);
 				defaultValues.add(strObj);
 				positions.add(i);
@@ -161,7 +166,8 @@ public class User_CRUD {
 		}
 
 		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
 		JTable table = new JTable(tableModel) {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				if (colIndex == 5)
@@ -169,6 +175,7 @@ public class User_CRUD {
 				return false;
 			}
 		};
+		table.setRowSorter(sorter);
 
 //		JTable table = new JTable(tableModel);
 
@@ -240,8 +247,7 @@ public class User_CRUD {
     	       }
     			return;
     		}
-        
-		
+
 		
 		
 		

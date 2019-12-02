@@ -45,8 +45,12 @@ public class Forms {
 		quantity = 0;
 		stock = 0;
 		prodPricePVE = 0.00;
+		if (functions.functions.validateInstaceof(modules.users.classes.Singleton.userLog, "Admin")) {
+			partnerSelected = null;
+		}else {
+			partnerSelected = (Partner) modules.users.classes.Singleton.userLog;
+		}
 		prodSelected = null;
-		partnerSelected = null;
 		ArrayList<String> productsName = new ArrayList<String>();
 		ArrayList<String> partnersName = new ArrayList<String>();
 		ArrayList<Product> productsObj = new ArrayList<Product>();
@@ -140,11 +144,18 @@ public class Forms {
 		panelQuantity.setLayout(flowLayoutRight);
 
 		// PUT EVERY ITEM CREATED INTO OBJECT
-		Object[] message = { "Choose type:", box1, scrollProducts, panelProducts, separator, "Choose user:",
-				scrollPartners, panelPartners, separator4, stockQuantity, panelQuantity, separator2, labelPriceUnit,
-				labelPricePVE, labelDiscount, separator3, labelTotalPrice,
-
-		};
+		Object[] message = null;
+		if (functions.functions.validateInstaceof(modules.users.classes.Singleton.userLog, "Admin")) {
+			message = new Object[]{ "Choose type:", box1, scrollProducts, panelProducts, separator, "Choose user:",
+					scrollPartners, panelPartners, separator4, stockQuantity, panelQuantity, separator2, labelPriceUnit,
+					labelPricePVE, labelDiscount, separator3, labelTotalPrice,
+				};
+		} else {
+			message = new Object[]{ "Choose type:", box1, scrollProducts, panelProducts, separator, stockQuantity, panelQuantity, separator2, labelPriceUnit,
+					labelPricePVE, labelDiscount, separator3, labelTotalPrice,
+				};
+		}
+		
 
 		// OBTAIN THE NAME AND OBJECT OF EVERY PRODUCT
 		for (int a = 0; a < Singleton.products.size(); a++) {
@@ -414,6 +425,7 @@ public class Forms {
 
 		do {
 			errorText = "";
+
 			int option = JOptionPane.showOptionDialog(null, message, "Purchase", 0, JOptionPane.QUESTION_MESSAGE, null,
 					choice, choice[0]);
 			if ((option == JOptionPane.CLOSED_OPTION) || (option == 1)) { // When you click on cancel or close the

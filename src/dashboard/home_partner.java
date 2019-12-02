@@ -9,7 +9,7 @@ import functions.functions;
 
 public class home_partner {
 	public static void main(String[] args) {
-		String[] options = {"Products","Buy","Exit"}; //buttons name
+		String[] options = {"Products","Buy","Profile","Exit"}; //buttons name
 		Integer option = 0;
 		do {
 			option = JOptionPane.showOptionDialog(null, "Videoclub\n", "Videoclub", JOptionPane.YES_NO_OPTION,
@@ -22,9 +22,13 @@ public class home_partner {
 			case 1:
 				goPurchases();
 				break;
+			case 2:
+				home.profile();
+				break;
 			}
+			
 			System.out.println(option);
-		}while(option != 2 && option != -1);
+		}while(option != 3 && option != -1);
 		
 	}
 	

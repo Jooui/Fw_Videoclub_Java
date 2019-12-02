@@ -1,20 +1,24 @@
 package dashboard;
 
+import javax.swing.JOptionPane;
+
 import classes.Date;
 import functions.*;
 import modules.products.classes.Film;
 import modules.products.classes.Product;
 import modules.purchases.classes.Purchase;
 import modules.users.classes.Partner;
+import modules.users.classes.User;
 
 
 public class home {
 
 	public static void main(String[] args) {
-		String[] options = {"Dummies","Purchases","Rents","Admin Options","Exit"}; //buttons name
-		String[] elements = {"generateData","goPurchases","goRents","goAdminOpt"}; //functions name
+		String[] options = {"Profile","Purchases","Rents","Admin Options","Exit"}; //buttons name
+		String[] elements = {"profile","goPurchases","goRents","goAdminOpt"}; //functions name
 
 		functions.menu(options, elements, "Videoclub Manager\n", "Videoclub"); //call the main menu
+		
 	}
 	
 	public static void goAdminOpt() {
@@ -86,28 +90,31 @@ public class home {
 
 		functions.secondaryMenu(options, elements, "Music Options\n", "MUSIC", "Music", "products", "Product_CRUD"); //call the main menu
 	}
-	
-	public static void generateData() {
-		Date dateObj = new Date("25/10/2018");
-		Product product = new Film("Spiderman 2", 50, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
-		Product product2 = new Film("Pelicula 2", 25, 15, 4.5, dateObj, 117, "Descripcion - Synopsis");
+		
+	public static void profile() {
+		String[] options = {"Ok", "Log out"};
+		System.out.println("entra al profile");
+		User userProfile = modules.users.classes.Singleton.userLog;
+		System.out.println(userProfile.toString());
+		System.out.println("encuentra el user loged");
 
-		Partner user = new Partner("jowi","123","Joel", "Revert Vila", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
-		Partner user2 = new Partner("pepe","123","Pepe", "Username1 Username2", functions.generateDni(null), "Ontinyent", "46870", "C/ Sant Josep, 6", "jrevertvila@gmail.com", dateObj, 665996125);
-
-		for (int i = 0; i < 15; i++) {
-			Purchase purchase = new Purchase(product2, user, 1);
-			Purchase purchase1 = new Purchase(product, user2, 1);
-			modules.purchases.classes.Singleton.purchases.add(purchase);
-			modules.purchases.classes.Singleton.purchases.add(purchase1);
-		}
 		
+		String partnerNameSur = (userProfile.getName() + " " + userProfile.getSurnames());
+		String partnerAddress = (userProfile.getPostalCode() + ", " + userProfile.getCity() + ", "
+				+ userProfile.getAddress());
+		String dataPart = "<html>Name :" + partnerNameSur + "<br/>DNI: " + userProfile.getDni()
+		+ "<br/>Tlf: " + userProfile.getTlf() + "<br/>Email: " + userProfile.getEmail()
+		+ "<br/>Birth Date: " + userProfile.getFnac().getDayMonthYear() + "<br/>Address: "
+		+ partnerAddress + "</html>";
 		
+		Integer option=JOptionPane.showOptionDialog(null, dataPart, "profile", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
 		
+		if (option == 1) {
+			modules.users.classes.Singleton.userLog = null;
+			index.main(null);
+		}		
 		
-		modules.products.classes.Singleton.products.add(product);
-		modules.users.classes.Singleton.users.add(user);
-		modules.products.classes.Singleton.products.add(product2);
-		modules.users.classes.Singleton.users.add(user2);
 	}
+	
+	
 }
