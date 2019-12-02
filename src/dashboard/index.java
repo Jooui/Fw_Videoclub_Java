@@ -18,9 +18,12 @@ import modules.users.templates.Forms;
 
 public class index {
 	static User userLoged = null;
-
+	static int contProgramInit = 0;
+	
 	public static void main(String[] args) {
-		classes.dummies.generateDummies();
+		if (contProgramInit == 0)
+			classes.dummies.generateDummies();
+		contProgramInit++;
 
 		Integer option = 0;
 		String[] options = { "Register", "Login" }; // buttons name
@@ -83,7 +86,7 @@ public class index {
 		User user = null;
 		do {
 			correct = false;
-			properties = Forms.partnerForm();
+			properties = Forms.partnerForm(null);
 			if (properties == null)
 				return;
 			user = new Partner((String) properties.get(0), (String) properties.get(1), (String) properties.get(2),

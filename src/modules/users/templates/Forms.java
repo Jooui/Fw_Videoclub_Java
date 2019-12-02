@@ -17,10 +17,11 @@ import classes.Date;
 import functions.functions;
 import functions.regexp;
 import modules.users.classes.Admin;
+import modules.users.classes.Partner;
 
 public class Forms {
 	
-	public static ArrayList<Object> adminForm() {
+	public static ArrayList<Object> adminForm(Admin admin) {
 		ArrayList<Object> result = new ArrayList<Object>();
 		Border borderRed = BorderFactory.createLineBorder(Color.RED, 1);
 		Border borderBlack = new JTextField().getBorder();
@@ -190,7 +191,7 @@ public class Forms {
 			return result;
 	}
 	
-	public static  ArrayList<Object> partnerForm() {
+	public static  ArrayList<Object> partnerForm(Partner partner) {
 		ArrayList<Object> result = new ArrayList<Object>();
 
 		String[] choice = {"Register","Cancel"};

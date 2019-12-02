@@ -21,6 +21,7 @@ import modules.products.classes.Film;
 import modules.products.classes.Game;
 import modules.products.classes.MusicDisc;
 import modules.products.classes.Product;
+import modules.users.classes.Singleton;
 import modules.users.classes.*;
 import modules.users.templates.Forms;
 
@@ -38,7 +39,7 @@ public class User_CRUD {
 			repeated = false;
 			ArrayList<Object> properties = new ArrayList<Object>();
 			if (type == "Admin") { // create new Admin
-				properties = Forms.adminForm();
+				properties = Forms.adminForm(null);
 				if (properties == null)
 					return;
 				user = new Admin((String) properties.get(0), (String) properties.get(1), (String) properties.get(2),
@@ -46,7 +47,7 @@ public class User_CRUD {
 						(String) properties.get(6), (String) properties.get(7), (String) properties.get(8),(Date) properties.get(9), (int) properties.get(10));
 
 			} else if (type == "Partner") { // create new Partner
-				properties = Forms.partnerForm();
+				properties = Forms.partnerForm(null);
 				if (properties == null)
 					return;
 				user = new Partner((String) properties.get(0),(String) properties.get(1),(String) properties.get(2), (String) properties.get(3), (String) properties.get(4),
@@ -128,13 +129,119 @@ public class User_CRUD {
                 
             }
         });
-		
-		
-		
+
 		
 		JOptionPane.showMessageDialog(null, scrollUsersTable); //Show products
 	
 	}
+	
+	
+	public static void editUser(String type) {
+
+		int cont_list = 0;
+		String[] choice = {"Delete","Cancel"};
+		List<Object[]> defaultValues = new ArrayList<Object[]>();
+		List<String> columns = new ArrayList<String>();
+		List<Object[]> values = new ArrayList<Object[]>();
+		ArrayList<Integer> positions = new ArrayList<Integer>();
+		JCheckBox check=new JCheckBox();
+
+		// Create general columns for table
+		columns.add("ID");
+		columns.add("NAME");
+		columns.add("SURNAMES");
+		columns.add("DNI");
+		columns.add("EMAIL");
+		columns.add("DELETE");
+
+		for (int i = 0; i < modules.users.classes.Singleton.users.size(); i++) {
+			User objUser = modules.users.classes.Singleton.users.get(i);
+			if (functions.validateInstaceof(objUser, type)) {
+				cont_list++;
+				Object[] strObj = { "" + String.format("%04d", cont_list), objUser.getName(),objUser.getSurnames(),"" + objUser.getDni(), objUser.getEmail()};				
+				values.add(strObj);
+				defaultValues.add(strObj);
+				positions.add(i);
+			}
+		}
+
+		DefaultTableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+
+		JTable table = new JTable(tableModel) {
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false;
+			}
+		};
+		table.setRowSorter(sorter);
+
+//		JTable table = new JTable(tableModel);
+
+		//Put chechbox on JTable
+		TableColumn Tcol = new TableColumn();
+		Tcol=table.getColumnModel().getColumn(5);//el numero dentro de getColum se refiere a la posici�nen la que se encuentra tu columna	 
+		Tcol.setCellEditor(table.getDefaultEditor(Boolean.class));
+		Tcol.setCellRenderer(table.getDefaultRenderer(Boolean.class));
+		
+		
+	
+		JScrollPane scrollProductsTable = new JScrollPane(table);
+		
+		
+
+		
+		// LISTENERS
+        
+        table.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+            	if (e.getClickCount() == 2) {
+	            	System.out.println("entra al event");
+	            	Integer selected = 0, cont_list = 0;
+	        		ArrayList<Object> properties = new ArrayList<Object>();
+	        		User user1 = modules.users.classes.Singleton.users.get(positions.get(table.getSelectedRow()));
+	        		selected = table.getSelectedRow();
+	        		int getNumber = positions.get((selected));
+	        		user1 = modules.users.classes.Singleton.users.get(getNumber);
+	        		
+	        		if (user1 instanceof Admin) {
+	        			properties = Forms.adminForm((Admin) user1);
+	        			if (properties == null)
+	        				return;
+	        			Admin user = null;
+	        			user = new Admin((String) properties.get(0), (String) properties.get(1), (String) properties.get(2),
+	    						(String) properties.get(3), (String) properties.get(4), (String) properties.get(5),
+	    						(String) properties.get(6), (String) properties.get(7), (String) properties.get(8),(Date) properties.get(9), (int) properties.get(10));
+	        			Singleton.users.set(getNumber, user);
+	
+	        		} else if (user1 instanceof Partner) {
+	        			Partner user = null;
+	        			properties = Forms.partnerForm((Partner) user1);
+	        			if (properties == null)
+	        				return;
+	
+	        			user = new Partner((String) properties.get(0),(String) properties.get(1),(String) properties.get(2), (String) properties.get(3), (String) properties.get(4),
+	    						(String) properties.get(5), (String) properties.get(6), (String) properties.get(7),
+	    						(String) properties.get(8), (Date) properties.get(9), (int) properties.get(10));
+	        			Singleton.users.set(getNumber, user);
+
+	        		}
+					tableModel.setRowCount(0);
+
+	        		for (int i = 0; i < modules.users.classes.Singleton.users.size(); i++) {
+	        			User objProduct = modules.users.classes.Singleton.users.get(i);
+	        			if (functions.validateInstaceof(objProduct, type)) {
+	        				cont_list++;
+							//tableModel.addRow(new String[] { "" + String.format("%04d", cont_list), objProduct.getName(),objProduct.getPrice()+"\u20AC","" + objProduct.getStock(), objProduct.getDate().getDate(), });
+	        			}//descomentar
+	        		}
+	        		e.consume();
+            	}
+            }
+        });
+        
+        JOptionPane.showMessageDialog(null, scrollProductsTable); //Show products
+	}
+
 	
 	
 	public static void deleteUser(String type) {

@@ -34,7 +34,6 @@ public class home_partner {
 	
 	public static void goProducts() {
 		String[] options = {"Movies","Games","Music Discs"}; //buttons name
-		String[] elements = {"createPurchase","searchPurchase"}; //functions name
 		String type = "";
 		Integer option = functions.secondaryButtonsMenu(options, "Products\n", "VIDEOCLUB"); //call the function where the OptionDialog will be called.
 			if (option == 0) {
@@ -64,7 +63,7 @@ public class home_partner {
 	
 	public static void goPurchases() {
 		String[] options = {"Buy Product","My purchases"}; //buttons name
-		String[] elements = {"createPurchase","searchPurchase"}; //functions name
+		String[] elements = {"createPurchase","myPurchases"}; //functions name
 
 		functions.secondaryMenu(options, elements, "Purchase Options\n", "PURCHASES", "Purchase", "purchases", "Purchase_CRUD"); //call the main menu
 	}
